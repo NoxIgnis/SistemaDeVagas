@@ -1,0 +1,97 @@
+.background-page {
+
+  background-image: url('../../../assets/bg.png') !important;
+  background-size: cover;
+  background-position: center;
+  height: 100dvh !important;
+  width: 100%; // Ajuste conforme necessário
+
+  .nav-login{
+    margin-right: calc((75% - 286px) / 2);
+  }
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    .retangulo {
+      .label-login{
+        text-align: center;
+        position: relative;
+        bottom: 14%;
+        color: #E4B861;
+        font-size: 2.4em;
+        font-family: "IBM+Plex+Sans", sans-serif;
+      }
+      .section-form{
+        position: relative;
+        left: 16%;
+        bottom: 12%;
+        .form-login{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          input{
+            background: none;
+            border:none;
+            border-bottom: 2px solid #fff;
+            width: 70%;
+            height: 4em;
+            color: #fff;
+          }
+          label{
+            font-family: "IBM+Plex+Sans", sans-serif;
+            color: #fff;
+            font-size: 1em;
+            margin-top: 2em;
+          }
+          .error-login{
+            color: #f88181;
+            font-family: "IBM+Plex+Sans", sans-serif;
+            font-size: 0.8em;
+            margin-top: 0.4em;
+          }
+          @media (min-width: 1080px){
+            .form-login{
+              flex-direction: row;
+            }
+          }
+        }
+        .cad{
+          font-family: "IBM+Plex+Sans", sans-serif;
+          color: #B8A47B;
+          font-size: 1em;
+          // display: flex;
+          // justify-content: center;
+          position: relative;
+          left: 26%;
+          top: 4em;
+          text-decoration: none;
+        }
+        .btn-login{
+          position: relative;
+          // display: flex;
+          // justify-content: center;
+          // bottom: -7%;
+          position: relative;
+          left: 17%;
+          top: 7em;
+        }
+      }
+      
+      width: 36em;
+      height: 36em;
+      background-color: rgb(31 31 31) !important;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: nowrap;
+      border-radius: 25px;
+    }
+
+  }
+}
