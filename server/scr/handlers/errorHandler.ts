@@ -16,30 +16,30 @@ export class ErrorHandler extends Error {
 
       errors.push(`${path}: ${issue.message}`);
     });
-    return res.status(400).json({ error: errors });
+    return res.status(422).json({ data: {error: errors }});
   }
 
   static undefinedError(error: any, res: Response) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({mensagem: error.message });
   }
 
-  static getError(error?: any, res?: Response) {
+  static logoutError(error?: any, res?: Response) {
     if (res) {
-      return res.status(701).json({ error: error });
+      return res.status(401).json({mensagem: error});
     }
     return {
-      statusCode: 701,
-      error: error?.Code,
+      statusCode: 401,
+      mensagem: error,
     };
   }
 
   static unauthorizedError(res?: Response) {
     if (res) {
-      return res.status(401).json({ error: ['Credenciais inválidas!'] });
+      return res.status(422).json({mensagem: 'Senha ou Email inválido!' });
     }
     return {
-      statusCode: 401,
-      error: ['Credenciais inválidas!'],
+      statusCode: 422,
+      mensagem: 'Senha ou Email inválido!',
     };
   }
 }

@@ -14,12 +14,12 @@
           @if(!validatePassword){<span class="error-login"
             >Password is required</span
           >}
+          @if(!error_login){<div class = "error-generic"><h3>{{error_message}}</h3></div>}
           <a href="#" class="cad">Cadastre-se</a>
           <section class="btn-login">
             <submit-button
               btn-text="Submit"
               (submit)="onSubmit()"
-              [loading]="loading()"
             />
           </section>
         </form>

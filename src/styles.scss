@@ -4,3 +4,11 @@
 html, body {
     margin: 0;
 }
+.error-generic {
+    h3{
+        color: #f88181;
+        font-family: "IBM+Plex+Sans", sans-serif;
+        font-size: 1.2em;
+        position: absolute;
+    }
+}

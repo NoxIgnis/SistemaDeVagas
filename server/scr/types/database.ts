@@ -7,10 +7,23 @@ export type RequestDB = {
 };
 
 export type User = {
-  usuario_id: number;
+  id: number;
   nome: string;
   email: string;
   senha: string;
-  status: boolean;
-  data_adicionado: Date;
+  competencias: string;
+  experiencias: string;
 };
+
+export type comp = {
+  id: number;
+  nome: string;
+}[];
+
+export type empresa = {
+  id: number;
+  nome: string;
+  email: string;
+  descricao?: string;
+  ramo?: string;
+}

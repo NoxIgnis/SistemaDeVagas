@@ -7,14 +7,14 @@ dotenv.config({ path: envPath });
 export default {
   port: getEnv('PORT_START'),
   knex: {
-    client: 'pg',
+    client: 'mysql',
     connection: {
       host: getEnv('DB_HOST'),
-      port: parseInt(getEnv('DB_PORT')),
+      // port: parseInt(getEnv('DB_PORT')),
       user: getEnv('DB_USER'),
-      password: getEnv('DB_PASS'),
+      password: getEnv('DB_PASS') ?? '',
       database: getEnv('DB_DATABASE'),
-      ssl: { rejectUnauthorized: false },
+      // ssl: { rejectUnauthorized: false },
     },
   },
   jwt:{

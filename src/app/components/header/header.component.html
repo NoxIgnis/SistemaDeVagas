@@ -1,7 +1,8 @@
 <div [class]="variant">
   <nav class="navbar">
     <div class="logo">
-      <img ngSrc="../../assets/Lg.png" width="286" height="50" />
+      <h1>TechJobs</h1>
+      <!-- <img ngSrc="../../assets/Lg.png" width="286" height="50" /> -->
     </div>
     <ul class="menu">
       <li><a href="#">Home</a></li>
@@ -18,6 +19,14 @@
         ariaCurrentWhenActive="page"
         >Login</a
       >
+    </div>
+    }@else{
+    <div class="menu">
+      <li><a routerLink="/usuario"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page">Usuario</a></li>
+      <!-- <submit-button btn-text="Logout" (submit)="onSubmit()" /> -->
     </div>
     }
   </nav>

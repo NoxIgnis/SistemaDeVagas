@@ -7,8 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../services/login/login.service';
 import { Router } from '@angular/router';
+import md5 from 'blueimp-md5';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,8 @@ export class LoginComponent {
   validatePassword = true;
   emailPassword = true;
   variant = '';
+  error_login = true;
+  error_message : string = '';
 
   constructor(private service: LoginService, private router: Router) {
     this.loginForm = new FormGroup({
@@ -39,18 +42,26 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.loading.set(true);
       this.service
-        .sendData({
+        .sendLogin({
           email: this.loginForm.value.email,
-          password: this.loginForm.value.password,
+          password: md5(this.loginForm.value.password),
         })
         .subscribe({
           next: (resp) => {
-            console.log(resp.data.token);
-            if (resp.data.token) {
+            console.log(resp)
+            if (resp?.token) {
+              localStorage.setItem('token', resp.token)
               this.router.navigate(['/']);
-            }
-            this.loginForm.reset();
-            this.loading.set(false);
+            };
+          },
+          error: (error) => {
+            console.log(error)
+            if (error?.error.mensagem) {
+              this.error_message = error?.error.mensagem
+              this.error_login = false;
+              this.loginForm.reset();
+              this.loading.set(false)
+            };
           },
         });
       this.validatePassword = !this.loginForm.controls['password'].errors;

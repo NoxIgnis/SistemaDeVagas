@@ -11,7 +11,16 @@
   align-items: center;
 
   .logo {
-    img {
+    // img {
+    //   max-height: 76px;
+    // }
+    h1 {
+      color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        font-family: "IBM+Plex+Sans", sans-serif;
+        font-size: 1.6em;
       max-height: 76px;
     }
   }
@@ -34,7 +43,7 @@
         transition: color 0.3s ease;
         text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
         font-family: "IBM+Plex+Sans", sans-serif;
-        font-size: 1.4em;
+        font-size: 1.3em;
 
         &:hover {
           color: lighten(#E4B861, 10%);
