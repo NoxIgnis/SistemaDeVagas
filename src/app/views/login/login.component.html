@@ -1,0 +1,29 @@
+<div class="background-page">
+  <div class="nav-login"><nav-bar [variant]="''"></nav-bar></div>
+  <div class="content">
+    <section [formGroup]="loginForm" class="retangulo">
+      <h3 class="label-login">LOGIN</h3>
+      <section class="section-form">
+        <form class="form-login">
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" />
+          @if(!emailPassword){<span class="error-login">email is required</span
+          >}
+          <label for="password">Password</label>
+          <input id="password" type="password" formControlName="password" />
+          @if(!validatePassword){<span class="error-login"
+            >Password is required</span
+          >}
+          @if(!error_login){<div class = "error-generic"><h3>{{error_message}}</h3></div>}
+          <a href="#" class="cad">Cadastre-se</a>
+          <section class="btn-login">
+            <submit-button
+              btn-text="Submit"
+              (submit)="onSubmit()"
+            />
+          </section>
+        </form>
+      </section>
+    </section>
+  </div>
+</div>

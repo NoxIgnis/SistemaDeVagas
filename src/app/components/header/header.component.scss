@@ -1,0 +1,68 @@
+.retangulo-head{
+  background-color: rgb(31 31 31);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0px 0px 50px 50px;
+}
+.navbar {
+  background-color: rgba(0, 0, 0, 0);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    // img {
+    //   max-height: 76px;
+    // }
+    h1 {
+      color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        font-family: "IBM+Plex+Sans", sans-serif;
+        font-size: 1.6em;
+      max-height: 76px;
+    }
+  }
+
+  .menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin: 0;
+    padding: 0;
+    margin-right: calc((50% - 286px) / 2); /* Centraliza levando em conta a largura da logo */
+
+    li {
+      display: inline-block;
+      margin-right: 20px;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        font-family: "IBM+Plex+Sans", sans-serif;
+        font-size: 1.3em;
+
+        &:hover {
+          color: lighten(#E4B861, 10%);
+        }
+      }
+    }
+  }
+
+  .login {
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-family: "IBM+Plex+Sans", sans-serif;
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+      font-size: 1.4em;
+      &:hover {
+        color: lighten(#E4B861, 10%);
+      }
+    }
+  }
+}

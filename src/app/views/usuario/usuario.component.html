@@ -1,0 +1,38 @@
+<div class="nav-login"><nav-bar [variant]="'retangulo-head'"></nav-bar></div>
+<div class="background-page">
+  <div class="content">
+    <section [formGroup]="dadosForm" class="retangulo">
+        <h3 class="label-login">Dados</h3>
+        <section class="section-form">
+          <form class="form-login">
+            <label for="nome">Nome</label>
+            <input id="nome" formControlName="nome" />
+            @if(!validateNome){<span class="error-login">nome is required</span
+            >}
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" />
+            @if(!emailPassword){<span class="error-login">email is required</span
+            >}
+            <label for="competencias">Competencias</label>
+            <ng-multiselect-dropdown
+              [placeholder]="'custom placeholder'"
+              [settings]="dropdownSettings"
+              [data]="dropdownList"
+              (onSelect)="onItemSelect($event)"
+              (onDeSelect) = "onItemDeselect($event)"
+              (onSelectAll)="onSelectAll($event)"
+              (onDeSelectAll) = "onDeSelectAll($event)"
+            >
+            </ng-multiselect-dropdown>
+            @if(!error_login){<div class = "error-generic"><h3>{{error_message}}</h3></div>}
+            <section class="btn-login">
+              <submit-button
+                btn-text="Submit"
+                (submit)="onSubmit()"
+              />
+            </section>
+          </form>
+        </section>
+      </section>
+  </div>
+</div>
