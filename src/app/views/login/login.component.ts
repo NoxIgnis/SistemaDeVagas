@@ -8,13 +8,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { LoginService } from '../../services/login/login.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import md5 from 'blueimp-md5';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, ButtonComponent, ReactiveFormsModule],
+  imports: [HeaderComponent, ButtonComponent, ReactiveFormsModule, RouterLinkActive, RouterLink],
   providers: [LoginService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -44,7 +44,7 @@ export class LoginComponent {
       this.service
         .sendLogin({
           email: this.loginForm.value.email,
-          password: md5(this.loginForm.value.password),
+          senha: md5(this.loginForm.value.password),
         })
         .subscribe({
           next: (resp) => {

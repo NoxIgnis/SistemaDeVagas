@@ -33,6 +33,16 @@ export class ErrorHandler extends Error {
     };
   }
 
+  static putError(error?: any, res?: Response) {
+    if (res) {
+      return res.status(401).json({mensagem: error});
+    }
+    return {
+      statusCode: 401,
+      mensagem: error,
+    };
+  }
+
   static unauthorizedError(res?: Response) {
     if (res) {
       return res.status(422).json({mensagem: 'Senha ou Email inválido!' });

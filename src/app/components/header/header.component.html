@@ -20,14 +20,15 @@
         >Login</a
       >
     </div>
-    }@else{
+    }@else if(!user){
     <div class="menu">
       <li><a routerLink="/usuario"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         ariaCurrentWhenActive="page">Usuario</a></li>
-      <!-- <submit-button btn-text="Logout" (submit)="onSubmit()" /> -->
     </div>
+    }@else if(user){
+      <submit-button btn-text="Logout" (submit)="onSubmit()" />
     }
   </nav>
 </div>

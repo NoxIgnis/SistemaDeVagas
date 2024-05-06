@@ -1,0 +1,50 @@
+<div class="background-page">
+    <div class="nav-login"><nav-bar [variant]="''"></nav-bar></div>
+    <div class="content">
+      <section [formGroup]="CadForm" class="retangulo">
+        <!-- <h3 class="label-login">Cadastrar</h3> -->
+        <section class="section-form">
+          <form class="form-login">
+            <label for="nome">Nome</label>
+            <input id="nome" formControlName="nome" />
+            @if(!validateNome){<span class="error-login">nome is required</span
+            >}
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" />
+            @if(!emailPassword){<span class="error-login">email is required</span
+            >}
+            <label for="senha">senha</label>
+            <input id="senha" type="password" formControlName="senha" />
+            @if(!validatePassword){<span class="error-login"
+              >Password is required</span
+            >}
+            <label for="tipo">Tipo</label>
+            <input id="tipo" type="tipo" formControlName="tipo" (ngModelChange) = "veriType($event)"/>
+            @if(!validatetipo){<span class="error-login"
+              >tipo is required</span
+            >}
+            @if(!tipoCad){
+              <label for="ramo">Ramo</label>
+              <input id="ramo" type="ramo" formControlName="ramo"/>
+              @if(!validatetipo){<span class="error-login"
+                >ramo is required</span
+              >}
+              <label for="descricao">Descrição</label>
+              <input id="descricao" type="descricao" formControlName="descricao" />
+              @if(!validatetipo){<span class="error-login"
+                >descricao is required</span
+              >}
+            }
+            @if(!error_login){<div class = "error-generic"><h3>{{error_message}}</h3></div>}
+            <section class="btn-login">
+              <submit-button
+                btn-text="Submit"
+                (submit)="onSubmit()"
+              />
+            </section>
+          </form>
+        </section>
+      </section>
+    </div>
+  </div>
+  

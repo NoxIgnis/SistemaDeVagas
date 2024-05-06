@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "flor_cafe": {
+    "system_vagas": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/flor_cafe",
+            "outputPath": "dist/system_vagas",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -37,7 +37,8 @@
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            }
+            },
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -67,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "flor_cafe:build:production"
+              "buildTarget": "system_vagas:build:production"
             },
             "development": {
-              "buildTarget": "flor_cafe:build:development"
+              "buildTarget": "system_vagas:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "flor_cafe:build"
+            "buildTarget": "system_vagas:build"
           }
         },
         "test": {

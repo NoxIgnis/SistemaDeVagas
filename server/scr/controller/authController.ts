@@ -7,6 +7,7 @@ import { ErrorHandler } from '../handlers/errorHandler';
 export const loginController = async (req: Request, res: Response) => {
   try {
     const body = loginSchema.parse(req.body);
+    console.log(body)
     const authentication = await authService(body);
 
     if (authentication.mensagem) {
@@ -61,7 +62,7 @@ export const upUserController = async (req: Request, res: Response, next: NextFu
       // const body = putSchema.parse(req.body);
       const decoded = await upUser(token, req.body);
 
-    //   res.json(decoded.response);
+      res.json(decoded.response);
     }
   } catch (err) {
     if (err instanceof ZodError) {
