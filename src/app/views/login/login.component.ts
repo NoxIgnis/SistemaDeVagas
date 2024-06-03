@@ -33,7 +33,7 @@ export class LoginComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        // Validators.minLength(8),
       ]),
     });
   }
@@ -44,7 +44,7 @@ export class LoginComponent {
       this.service
         .sendLogin({
           email: this.loginForm.value.email,
-          senha: md5(this.loginForm.value.password),
+          senha: this.loginForm.value.password,
         })
         .subscribe({
           next: (resp) => {

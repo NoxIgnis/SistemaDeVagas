@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class CadastroService {
-  private _candidatoEndpoint = `${environment.apiUrl}/usuarios/candidato`;
+  private _candidatoEndpoint = `${environment.apiUrl}/usuarios/candidatos`;
   private _empresaEndpoint = `${environment.apiUrl}/usuarios/empresa`;
   constructor(private http: HttpClient) {}
 
@@ -28,6 +28,11 @@ export class CadastroService {
     descricao?: string;
   }): Observable<CadResponse> {
     const data = { email, senha, nome, ramo, descricao};
-    return this.http.post<CadResponse>(tipo == '1'? this._empresaEndpoint : this._candidatoEndpoint, data);
+    console.log(data);
+    const token = localStorage.getItem('token')?? '';
+
+    return this.http.post<CadResponse>(tipo == '1'? this._empresaEndpoint : this._candidatoEndpoint, data,  {
+      headers:{Authorization: 'Bearer ' + token} 
+    });
   }
 }

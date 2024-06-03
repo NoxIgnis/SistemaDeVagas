@@ -19,6 +19,7 @@ export class LoginService {
     senha: string;
   }): Observable<LoginResponse> {
     const data = { email, senha };
+    console.log(data);
     return this.http.post<LoginResponse>(this._loginEndpoint, data);
   }
 }

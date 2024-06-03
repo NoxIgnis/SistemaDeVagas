@@ -26,9 +26,12 @@ export const loginController = async (req: Request, res: Response) => {
 
 export const logoutController = async (req: Request, res: Response) => {
   try {
+    console.log(req.headers)
     const token : string | undefined = req.headers['authorization'];
+    console.log(token)
     if(token){
     const decoded = await authToken(token);
+    console.log(decoded)
 
     res.json(decoded);
     }

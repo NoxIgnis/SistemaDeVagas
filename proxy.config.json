@@ -1,6 +1,6 @@
 {
-    "/": {
-      "target": "http://localhost:3000",
+    "/*": {
+      "target": "http://10.20.8.18:8000",
       "secure": false,
       "changeOrigin": true
     }

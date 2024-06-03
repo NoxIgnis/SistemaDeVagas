@@ -37,24 +37,24 @@
               <label for="cargo">cargo</label>
               <input id="cargo" formControlName="cargo" />
               @if(!error_login){<div class = "error-generic"><h3>{{error_message}}</h3></div>}
-              <section class="btn-login">
-                <submit-button
-                  btn-text="Submit"
-                  (submit)="onSubmit()"
-                />
-              </section>
             }@else{
               <label for="ramo">ramo</label>
               <input id="ramo" formControlName="ramo" />
               <label for="descricao">descricao</label>
               <input id="descricao" formControlName="descricao" />
-              <section class="btn-login">
-                <submit-button
-                  btn-text="Submit"
-                  (submit)="onSubmit()"
-                />
-              </section>
             }
+            <section class="btn-login">
+              <submit-button
+                btn-text="Atualizar"
+                (submit)="onSubmit()"
+              />
+            </section>
+            <section class="btn-delete">
+              <submit-button
+                btn-text="Deletar"
+                (submit)="onDelete()"
+              />
+            </section>
           </form>
         </section>
       </section>

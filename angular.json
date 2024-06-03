@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "proxyConfig": "proxy.config.json",
   "newProjectRoot": "projects",
   "projects": {
     "system_vagas": {
@@ -37,8 +38,7 @@
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            },
-            "proxyConfig": "proxy.conf.json"
+            }
           },
           "configurations": {
             "production": {

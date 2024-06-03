@@ -52,7 +52,7 @@ export class CadastroComponent {
         .sendCad({
           email: this.CadForm.value.email,
           nome: this.CadForm.value.nome,
-          senha: md5(this.CadForm.value.password),
+          senha: this.CadForm.value.senha,
           tipo: this.CadForm.value.tipo,
           ramo: this.CadForm.value.ramo,
           descricao: this.CadForm.value.descricao

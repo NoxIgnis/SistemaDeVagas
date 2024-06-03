@@ -27,7 +27,12 @@ export class GetUserService {
       headers:{Authorization: 'Bearer ' + token} 
     });
   }
-
+  deleteUser(): Observable<any> {
+    const token = localStorage.getItem('token') ?? '';
+    return this.http.delete<any>(this._getUserEndpoint,{
+      headers:{Authorization: 'Bearer ' + token} 
+    });
+  }
   sendEdit({
     email,
     nome,

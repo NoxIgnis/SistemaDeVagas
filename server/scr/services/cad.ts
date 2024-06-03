@@ -62,3 +62,30 @@ export const insertUser = async (data: {
         response:"Usuário cadastrado com sucesso"
       };
   };
+
+  export const deleteUser = async(token : string): Promise<servicesResponseType<IAuthToken>> =>{
+    const tokenParts = token.split(' ');
+    let delet: any;
+    const decoded = jwt.verify(tokenParts[1], config.jwt.secret) as JwtPayload  
+    let lista_token = await db('lista_token').select('id').where({
+      email: decoded.email,
+    });
+    if (!lista_token) return ErrorHandler.logoutError('error');
+    await db('lista_token').delete().where('id', lista_token?.[0]?.id)
+
+    if(decoded.tipo == 1){
+      delet = await db('empresas').delete().where({
+        id: decoded.id,
+      });    
+    }else{
+      delet = await db('usuario').delete().where({
+        id: decoded.id,
+      });
+    }
+    
+    if(!delet) return ErrorHandler.logoutError('delete fail');
+    
+     return {
+      response:"Usuário Deletado com sucesso"
+    };
+  }

@@ -15,6 +15,7 @@ interface IAuthToken {
 }
 
 interface IgetUser {
+    id?: string;
     nome?: string; 
     email?:string;
     tipo?: string;
@@ -37,7 +38,6 @@ export const authService = async (data: {
   console.log(user)
   if (!user?.[0]){
   console.log(159159)
-
     // verifica se existe um email para empresas caso o usuario seja vazio
     type = 1
     user = await db<empresa>('empresas').select('*').where({
@@ -63,7 +63,8 @@ export const authService = async (data: {
   const payload = {
     email: user[0].email,
     versao: md5(`${user[0].id}-${user[0].email}-${user[0].senha}`),
-    tipo: type
+    tipo: type,
+    id: user[0].id
   };
 
   const token = {
@@ -123,6 +124,7 @@ export const getUser = async (token: string): Promise<servicesResponseType<IgetU
     }
 
     const bodyReturn: IgetUser = {
+      id: String(user?.[0]?.id),
       nome: user?.[0]?.nome ?? emp?.[0]?.nome, 
       email:user?.[0]?.email ?? emp?.[0]?.email, 
       tipo: decoded.tipo == 1 ? 'empresa' : 'candidato', 

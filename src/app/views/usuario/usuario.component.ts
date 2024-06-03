@@ -61,7 +61,7 @@ export class UsuarioComponent {
         next: (resp) => {
           console.log(resp)
           this.dadosForm.patchValue({email: resp?.email, nome: resp?.nome});
-          if(resp?.tipo == 'candidato'){
+          if(resp?.tipo.toLowerCase() == 'candidato'){
             resp?.experiencia?.forEach((exp)=>{
               this.dadosForm.patchValue({
                 empresa: exp.nome_empresa,
@@ -93,7 +93,7 @@ export class UsuarioComponent {
           };
         },
       });
-      if(this.candidato){
+      if(!this.candidato){
         this.service.getCompetencias().subscribe({
           next: (resp) => {
             console.log(resp)
@@ -149,6 +149,26 @@ export class UsuarioComponent {
     } else {
       this.emailPassword = !this.dadosForm.controls['email'].errors;
     }
+  }
+
+  onDelete() {
+      this.service
+        .deleteUser()
+        .subscribe({
+          next: (resp) => {
+            console.log(resp)
+            localStorage.removeItem('token')
+              this.router.navigate(['/']);
+          },
+          error: (error) => {
+            console.log(error)
+            if (error?.error.mensagem) {
+              this.error_message = error?.error.mensagem
+              this.error_login = false;
+              this.dadosForm.reset();
+            };
+          },
+        });
   }
 
   onItemSelect(event: any){
