@@ -16,11 +16,13 @@ type localVariants = 'retangulo-head' | '';
 export class HeaderComponent {
   @Input() login: boolean = false;
   @Input() variant: localVariants = 'retangulo-head';
+  @Input() user: boolean = false;
 
   constructor(private service: LogoutService, private router: Router) {
-    const token  = localStorage.getItem('token')
+    const token  = localStorage.getItem('token') ?? ''
+     this.user = this.router.url == '/usuario'
     // || this.router.url == '/login'
-    if(token ) this.login = true; // Atribui a URL atual a uma variável
+    if(token) this.login = true; // Atribui a URL atual a uma variável
   }
 
   onSubmit() {

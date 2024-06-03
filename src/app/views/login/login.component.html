@@ -15,7 +15,12 @@
             >Password is required</span
           >}
           @if(!error_login){<div class = "error-generic"><h3>{{error_message}}</h3></div>}
-          <a href="#" class="cad">Cadastre-se</a>
+          <a
+          routerLink="/cadastro"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          class="cad">Cadastre-se</a>
           <section class="btn-login">
             <submit-button
               btn-text="Submit"

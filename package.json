@@ -1,5 +1,5 @@
 {
-  "name": "flor-cafe",
+  "name": "system-vagas",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:flor_cafe": "node dist/flor_cafe/server/server.mjs"
+    "serve:ssr:system_vagas": "node dist/system_vagas/server/server.mjs"
   },
   "private": true,
   "dependencies": {
