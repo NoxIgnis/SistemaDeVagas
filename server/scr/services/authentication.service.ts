@@ -23,7 +23,12 @@ class authenticationService implements IauthenticationService {
   async validate({ id }: { id: string }): Promise<void> {
     try {
       await this.messageRepository.delete({ id });
-
+      // const tokenParts = token.split(' ');
+      // let decoded: any;
+      // decoded = jwt.verify(tokenParts[1], config.jwt.secret) as JwtPayload
+      // let lista_token = await db('lista_token').select('id').where({
+      //   email: decoded.email,
+      // });
       return;
     } catch (err) {
       throw err;
