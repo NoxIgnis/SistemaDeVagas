@@ -2,29 +2,34 @@
     Classe para validar os tokens das requests
 */
 
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
+// import { ErrorHandler } from '../handlers/errorHandler';
+import { authenticationService } from '../services/authentication.service';
 
 interface IauthenticationController {
-  getAll(req: Request, res: Response): Promise<Response>;
-  create(req: Request, res: Response): Promise<Response>;
+  validate(req: Request, res: Response): Promise<Response>;
 }
 
 class authenticationController {
   constructor(private authService: authService = new authService()) {}
 
-  async create(req: Request, res: Response): Promise<Response> {
+  async validate(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
     try {
-      const { content } = req.body;
+      const token = req.headers['authorization'];
 
-      if (!content) {
-        return res.status(400).json({ error: 'Content is required' });
+      if (!token) {
+        return res.status(401).json({ mensagem: 'Token is required' });
       }
 
-      const createdMessage = await this.authService.create({ content });
+      this.authService.validate();
 
-      return res.json(createdMessage);
+      next();
     } catch (err) {
       return res.status(400).json({ error: err });
     }
