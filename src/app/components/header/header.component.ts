@@ -17,6 +17,7 @@ export class HeaderComponent {
   @Input() login: boolean = false;
   @Input() variant: localVariants = 'retangulo-head';
   @Input() user: boolean = false;
+  @Input() empresa: boolean = false;
 
   constructor(private service: LogoutService, private router: Router) {
     const token  = localStorage.getItem('token') ?? ''

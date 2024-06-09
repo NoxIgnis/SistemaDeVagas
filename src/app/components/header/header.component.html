@@ -9,6 +9,12 @@
       <li><a href="#">Espaço</a></li>
       <li><a href="#">Sobre</a></li>
       <li><a href="#">Contato</a></li>
+      @if(!empresa){
+          <li><a routerLink="/vagas"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ariaCurrentWhenActive="page">Vagas</a></li>
+      }
     </ul>
     @if(!login){
     <div class="login">

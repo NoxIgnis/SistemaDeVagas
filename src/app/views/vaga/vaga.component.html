@@ -1,0 +1,40 @@
+<div class="nav-login"><nav-bar [variant]="'retangulo-head'"></nav-bar></div>
+<div class="background-page">
+  <div class="content">
+    <section [formGroup]="dadosForm" class="retangulo">
+        <h3 class="label-login">Dados</h3>
+        <section class="section-form">
+          <form class="form-login">
+            <label for="id">id</label>
+            <input id="id" formControlName="id" /><br>
+            <label for="titulo">titulo</label>
+            <input id="titulo" formControlName="titulo" /><br>
+            <label for="experiencia">experiencia</label>
+            <input id="experiencia" formControlName="experiencia" /><br>
+            <label for="salario_max">salario max</label>
+            <input id="salario_max" formControlName="salario_max" /><br>
+              <label for="salario_min">salario min</label>
+              <input id="salario_min" formControlName="salario_min" /><br>
+              <label for="ramo_id">ramo</label>
+              <input id="ramo_id" formControlName="ramo_id" /><br>
+              <label for="descricao">descricao</label>
+              <input id="descricao" formControlName="descricao" /><br>
+              <label for="ativo">ativo</label>
+              <input id="ativo" formControlName="ativo" /><br>
+            <section class="btn-login">
+              <submit-button
+                btn-text="Atualizar"
+                (submit)="onSubmit()"
+              />
+            </section>
+            <section class="btn-delete">
+              <submit-button
+                btn-text="Deletar"
+                (submit)="onDelete()"
+              />
+            </section>
+          </form>
+        </section>
+      </section>
+  </div>
+</div>

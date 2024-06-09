@@ -1,14 +1,19 @@
 import express from 'express';
-import { loginController, logoutController ,getUserController, upUserController} from '../controller/authController';
-import { getCompetencias, userController, deleteUserController} from '../controller/extraController';
-
+import { loginController, logoutController, getUserController, upUserController } from '../controller/authController';
+import { getCompetencias, userController, getRamo, deleteUserController } from '../controller/extraController';
+import { vagasInsert, vagasDelete, vagasUp, vagaGet } from '../controller/vagas.controller';
 const authRouter = express.Router();
 const cadRouter = express.Router();
 authRouter.post('/login', loginController);
 authRouter.post('/logout', logoutController);
-// cadRouter.post('/usuario/candidato', userController)
+authRouter.post('/vagas', vagasInsert);
+authRouter.put('/vagas/:id_vaga', vagasUp);
+authRouter.delete('/vagas/:id_vaga', vagasDelete);
+authRouter.get('/vagas/:id_vaga', vagaGet);
+authRouter.get('/vagas', vagaGet);
 authRouter.get('/usuario', getUserController);
 authRouter.get('/competencias', getCompetencias);
+authRouter.get('/ramos', getRamo);
 authRouter.put('/usuario', upUserController);
 authRouter.delete('/usuario', deleteUserController);
 

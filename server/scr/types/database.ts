@@ -28,3 +28,39 @@ export type empresa = {
   descricao?: string;
   ramo?: string;
 }
+
+export type vaga = {
+  id: number;
+  ramo_id: number;
+  titulo: string;
+  descricao: string;
+  competencias: [
+    {
+      id:number;
+      nome:string;
+    }
+  ];
+  experiencia: number;
+  salario_min: number;
+  salario_max: number;
+  ativo: boolean;
+  empresa_email?: string;
+}
+
+export type Allvagas = {
+  id: number;
+  ramo_id: number;
+  titulo: string;
+  descricao: string;
+  competencias: [
+    {
+      id:number;
+      nome:string;
+    }
+  ];
+  experiencia: number;
+  salario_min: number;
+  salario_max: number;
+  ativo: boolean;
+  empresa_email: string;
+}[]
