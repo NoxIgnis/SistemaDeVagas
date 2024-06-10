@@ -2,6 +2,7 @@
  * ESSA CLASSE É APENAS PARA SIMULAR UM ORM DE BANCO DE DADOS
  * Com o Prisma, não será necessário criar essa classe
  */
+import db from '../knex';
 
 const tables: { [index: string]: any[] } = {
   message: [],
@@ -13,22 +14,20 @@ class Database {
     return data;
   }
 
-  async delete(table: string, id: string): Promise<void> {
-    tables[table] = tables[table].filter((data) => data.id !== id);
+  async delete(table: string, where: any): Promise<any> {
+    return await db(table).delete().where(where);
   }
 
-  async find(table: string, id: string): Promise<any> {
-    return tables[table].find((data) => data.id === id);
+  async find(table: string, select: string, where: any): Promise<any> {
+    return await db(table).select(select).where(where)
   }
 
-  async findAll(table: string): Promise<any[]> {
-    return [...tables[table]];
+  async findAll(table: string, select: string): Promise<any> {
+    return await db(table).select(select);
   }
 
-  async update(table: string, id: string, data: any): Promise<any> {
-    const index = tables[table].findIndex((data) => data.id === id);
-    tables[table][index] = data;
-    return data;
+  async update(table: string, data: any, returned: string, where: any): Promise<any> {
+    return await db(table).update(data, [returned]).where(where)
   }
 }
 

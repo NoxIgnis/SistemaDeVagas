@@ -4,11 +4,12 @@
  * Nessa classe por exemplo, são gerados os IDs, entre outros
  */
 
-// import { Message } from '../models/message.model';
-import { MessageRepository } from '../repositories/authentication.repository';
+import config from '../configs/config';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { authenticationRepository } from '../repositories/authentication.repository';
 
 interface IauthenticationService {
-  validate({ id }: { id: string }): Promise<void>;
+  validate(token: string): Promise<boolean>;
 }
 
 class authenticationService implements IauthenticationService {
@@ -17,19 +18,16 @@ class authenticationService implements IauthenticationService {
    * Caso não seja passado um repositório, ele usa por padrão o MessageRepository
    */
   constructor(
-    private messageRepository: MessageRepository = new MessageRepository()
-  ) {}
+    private authRepository: authenticationRepository = new authenticationRepository()
+  ) { }
 
-  async validate({ id }: { id: string }): Promise<void> {
+  async validate(token: string): Promise<boolean> {
     try {
-      await this.messageRepository.delete({ id });
-      // const tokenParts = token.split(' ');
-      // let decoded: any;
-      // decoded = jwt.verify(tokenParts[1], config.jwt.secret) as JwtPayload
-      // let lista_token = await db('lista_token').select('id').where({
-      //   email: decoded.email,
-      // });
-      return;
+      if (token) {
+        const decoded = jwt.verify(token, config.jwt.secret) as JwtPayload
+        return await this.authRepository.authToken(token, decoded.email);
+      }
+      return false;
     } catch (err) {
       throw err;
     }
