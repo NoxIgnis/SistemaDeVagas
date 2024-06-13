@@ -133,7 +133,7 @@ export const insertVaga = async (data: {
       id: number;
       nome: string;
     }
-  ];
+  ] | string;
   experiencia: number;
   salario_min: number;
   salario_max: number;
@@ -151,6 +151,7 @@ export const insertVaga = async (data: {
   // if (!emp) {
   // verifica se existe um email para empresas caso o usuario seja vazio
   data.empresa_email = email;
+  data.competencias = JSON.stringify(data.competencias ?? {});
   console.log(data);
 
   id = await db('vagas').insert(data, ['id']);
@@ -174,7 +175,7 @@ export const upVaga = async (data: {
       id: number;
       nome: string;
     }
-  ];
+  ] | string;
   experiencia: number;
   salario_min: number;
   salario_max: number;
@@ -185,7 +186,7 @@ export const upVaga = async (data: {
   console.log(id_vaga)
   console.log(data)
   if (id_vaga) {
-    // verifica se existe um email para empresas caso o usuario seja vazio
+    data.competencias = JSON.stringify(data.competencias ?? {});
     id = await db('vagas').update(data, ['id']).where({
       id: id_vaga,
     });
@@ -228,11 +229,11 @@ export const getVagas = async (email: string): Promise<servicesResponseType<IVag
     if (typeof email !== 'string') {
       throw new Error("Invalid token type");
     }
-    let vagas: any = await db<Allvagas>('vagas').select('*').where({ empresa_email: email });
+    let vagas: any = await db<Allvagas>('vagas').select('*').where({ empresa_email: email ?? '' });
 
-    // let bodyReturn: any = vagas;
-    vagas.forEach((element) => {
-      bodyReturn.push(element)
+    let bodyReturn: any = vagas;
+    vagas.forEach((element: any, index: any) => {
+      bodyReturn[index].competencias = JSON.parse(element.competencias)
     });
 
     return {

@@ -1,39 +1,56 @@
 <div class="nav-login"><nav-bar [variant]="'retangulo-head'"></nav-bar></div>
 <div>
-@for (vaga of vagas; track vaga) {
-    <h2>{{ vaga.titulo }}</h2>
-    <p>{{ vaga.descricao }}</p>
-    <button (click)="viewDetails(vaga.id)">Ver Detalhes</button>
-}
-<div class="background-page">
+  @for (vaga of vagas; track vaga) {
+  <h2>{{ vaga.titulo }}</h2>
+  <p>{{ vaga.descricao }}</p>
+  <button (click)="viewDetails(vaga.id)">Ver Detalhes</button>
+  }
+  <div class="background-page">
     <div class="content">
       <section [formGroup]="dadosForm" class="retangulo">
-          <h3 class="label-login">Dados</h3>
-          <section class="section-form">
-            <form class="form-login">
-              <label for="titulo">titulo</label>
-              <input id="titulo" formControlName="titulo" /><br>
-              <label for="experiencia">experiencia</label>
-              <input id="experiencia" formControlName="experiencia" /><br>
-              <label for="salario_max">salario max</label>
-              <input id="salario_max" formControlName="salario_max" /><br>
-                <label for="salario_min">salario min</label>
-                <input id="salario_min" formControlName="salario_min" /><br>
-                <label for="ramo_id">ramo</label>
-                <input id="ramo_id" formControlName="ramo_id" /><br>
-                <label for="descricao">descricao</label>
-                <input id="descricao" formControlName="descricao" /><br>
-                <label for="ativo">ativo</label>
-                <input id="ativo" formControlName="ativo" /><br>
-              <section class="btn-login">
-                <submit-button
-                  btn-text="Cadastrar"
-                  (submit)="cadastrarVaga()"
-                />
-              </section>
-            </form>
-          </section>
+        <h3 class="label-login">Dados</h3>
+        <section class="section-form">
+          <form class="form-login">
+            <label for="titulo">titulo</label>
+            <input id="titulo" formControlName="titulo" /><br />
+            <label for="experiencia">experiencia</label>
+            <input id="experiencia" formControlName="experiencia" /><br />
+            <label for="salario_max">salario max</label>
+            <input id="salario_max" formControlName="salario_max" /><br />
+            <label for="salario_min">salario min</label>
+            <input id="salario_min" formControlName="salario_min" /><br />
+            <label for="descricao">descricao</label>
+            <input id="descricao" formControlName="descricao" /><br />
+            <label for="ativo">ativo</label>
+            <input id="ativo" formControlName="ativo" /><br />
+            <label for="ramo_id">Ramos</label>
+            <ng-multiselect-dropdown
+              [placeholder]="'Selecione'"
+              [settings]="dropdownSettings"
+              [data]="dropdownList"
+              (onSelect)="onItemSelectSingle($event)"
+              formControlName="ramo_id"
+            >
+            </ng-multiselect-dropdown>
+            <h3 class="label-login">Competencias</h3>
+            <label for="competencias">Competencias</label>
+            <ng-multiselect-dropdown
+              [placeholder]="'Selecione'"
+              [settings]="dropdownSettingsComp"
+              [data]="dropdownListComp"
+              (onSelect)="onItemSelect($event)"
+              (onDeSelect)="onItemDeselect($event)"
+              (onSelectAll)="onSelectAll($event)"
+              (onDeSelectAll)="onDeSelectAll($event)"
+              formControlName="competencias"
+            >
+            </ng-multiselect-dropdown>
+            <section class="btn-login">
+              <submit-button btn-text="Cadastrar" (submit)="cadastrarVaga()" />
+            </section>
+          </form>
         </section>
+      </section>
     </div>
-
+  </div>
 </div>
