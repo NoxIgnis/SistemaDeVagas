@@ -13,8 +13,9 @@ interface IgetUser {
 
 interface IuserRepository {
     getUser(email: string, id: string): Promise<IgetUser>;
-    updateUser(email: string, id: string): Promise<IgetUser>;
-    deleteUser(email: string, id: string): Promise<IgetUser>;
+    insertUser(email: string, id: string): Promise<IgetUser>;
+    updateUser(email: string, id: string): Promise<any>;
+    deleteUser(email: string, id: string): Promise<any>;
 }
 
 class userRepository implements IuserRepository {
@@ -24,7 +25,12 @@ class userRepository implements IuserRepository {
     constructor(private db: Database = new Database()) { }
 
     async getUser(email: string, id: string): Promise<IgetUser> {
-        return await this.db.find('usuario', '*', { email: email, id: id });
+        const select = await this.db.findMore('usuario', '*', `IF(tipo = 1, 'empresa', 'candidato') as tipo`, { email: email, id: id });
+        return select[0];
+    }
+
+    async insertUser(body: any): Promise<any> {
+        return await this.db.create('usuario', body);
     }
 
     async updateUser(id: string, body: any): Promise<any> {

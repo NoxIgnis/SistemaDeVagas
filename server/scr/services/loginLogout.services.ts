@@ -36,6 +36,20 @@ class loginService implements ILoginService {
             throw err;
         }
     }
+
+    async insertToken(data: {
+        token: string,
+        email: string,
+    }): Promise<{ id: string } | void> {
+        try {
+            if (data) {
+                return await this.loginRep.token(data);
+            }
+            return;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 class logoutService implements ILogoutService {
     constructor(
@@ -46,7 +60,7 @@ class logoutService implements ILogoutService {
         try {
             if (token) {
                 const decoded = jwt.verify(token, config.jwt.secret) as JwtPayload
-                return await this.logoutRep.logout(token[1], decoded.email);
+                return await this.logoutRep.logout(token, decoded.email);
             }
             return false;
         } catch (err) {

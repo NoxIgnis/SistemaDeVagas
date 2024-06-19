@@ -16,7 +16,7 @@ class LoginController implements ILoginController {
 
   async login(req: Request, res: Response): Promise<Response> {
     try {
-      const { content } = req.body;
+      const content = req.body;
       if (!content) return res.status(400).json({ error: 'Content is required' });
 
       const body = loginSchema.parse(content);
@@ -29,9 +29,12 @@ class LoginController implements ILoginController {
         tipo: select.tipo,
         id: select.id
       };
+      const token = jwt.sign(payload, config.jwt.secret);
+      const token_id = await this.loginServ.insertToken({ token: token, email: select.email });
+      if (!token_id) return res.status(400).json({ error: 'Error token' });
 
       return res.json({
-        token: jwt.sign(payload, config.jwt.secret),
+        token: token
       });
     } catch (err) {
       return res.status(400).json({ error: err });
@@ -48,7 +51,7 @@ class LogoutController implements ILogoutController {
 
       if (!token) return res.status(400).json({ error: 'Error select' });
       await this.logoutServ.logout(token[1] ?? '')
-      return res.json({ menssagem: 'Logout OK' });
+      return res.json({ mensagem: 'Logout OK' });
     } catch (err) {
       return res.status(400).json({ error: err });
     }

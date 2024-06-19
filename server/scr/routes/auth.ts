@@ -1,15 +1,4 @@
 import express from 'express';
-// import {
-//   // loginController,
-//   // logoutController,
-//   // getUserController,
-//   // upUserController,
-// } from '../controller/authController';
-// import {
-//   // getCompetencias,
-//   // deleteUserController,
-//   // userController,
-// } from '../controller/extraController';
 
 import {
   authenticationController
@@ -22,7 +11,6 @@ import {
 import {
   UserController
 } from '../controller/user.controller';
-
 
 import {
   competenciasController

@@ -11,21 +11,21 @@ export class ErrorHandler extends Error {
 
   static validationError(error: any, res: Response) {
     const errors: string[] = [];
-    error.issues.map((issue: { message: string; path: string[] }) => {
+    error.issues.map((issue: { mensagem: string; path: string[] }) => {
       const path = issue.path[0];
 
-      errors.push(`${path}: ${issue.message}`);
+      errors.push(`${path}: ${issue.mensagem}`);
     });
-    return res.status(422).json({ data: {error: errors }});
+    return res.status(422).json({ data: { error: errors } });
   }
 
   static undefinedError(error: any, res: Response) {
-    return res.status(500).json({mensagem: error.message });
+    return res.status(500).json({ mensagem: error.message });
   }
 
   static logoutError(error?: any, res?: Response) {
     if (res) {
-      return res.status(401).json({mensagem: error});
+      return res.status(401).json({ mensagem: error });
     }
     return {
       statusCode: 401,
@@ -35,7 +35,7 @@ export class ErrorHandler extends Error {
 
   static putError(error?: any, res?: Response) {
     if (res) {
-      return res.status(401).json({mensagem: error});
+      return res.status(401).json({ mensagem: error });
     }
     return {
       statusCode: 401,
@@ -45,7 +45,7 @@ export class ErrorHandler extends Error {
 
   static unauthorizedError(res?: Response) {
     if (res) {
-      return res.status(422).json({mensagem: 'Senha ou Email inválido!' });
+      return res.status(422).json({ mensagem: 'Senha ou Email inválido!' });
     }
     return {
       statusCode: 422,

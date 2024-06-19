@@ -5,13 +5,12 @@
 import db from '../knex';
 
 const tables: { [index: string]: any[] } = {
-  message: [],
+  mensagem: [],
 };
 
 class Database {
   async create(table: string, data: any): Promise<any> {
-    tables[table].push(data);
-    return data;
+    return await db(table).insert(data, ['id']);
   }
 
   async delete(table: string, where: any): Promise<any> {
@@ -20,6 +19,10 @@ class Database {
 
   async find(table: string, select: string, where: any): Promise<any> {
     return await db(table).select(select).where(where)
+  }
+
+  async findMore(table: string, select: string, select2: string, where: any): Promise<any> {
+    return await db(table).select(select, db.raw(select2)).where(where)
   }
 
   async findAll(table: string, select: string): Promise<any> {

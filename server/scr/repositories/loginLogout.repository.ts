@@ -21,8 +21,14 @@ class loginRepository implements ILoginRepository {
         email: string,
         senha: string
     }): Promise<{ id: string, email: string, tipo: string }> {
-        const select = await this.db.find('usuario', 'id, email, tipo', login);
+        const select = await this.db.find('usuario', '*', login);
         return select[0];
+    }
+    async token(data: {
+        token: string,
+        email: string,
+    }): Promise<{ id: string, email: string, tipo: string }> {
+        return await this.db.create('lista_token', data);
     }
 }
 

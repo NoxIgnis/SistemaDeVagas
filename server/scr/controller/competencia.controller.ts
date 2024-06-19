@@ -21,8 +21,8 @@ class competenciasController implements IcompetenciasController {
         next: NextFunction
     ): Promise<Response> {
         try {
-            await this.compService.getCompetencias()
-            return res.status(401).json({ menssagem: 'Token Error' });
+            const competencias = await this.compService.getCompetencias();
+            return res.status(200).json(competencias);
         } catch (err) {
             return res.status(400).json({ error: err });
         }
