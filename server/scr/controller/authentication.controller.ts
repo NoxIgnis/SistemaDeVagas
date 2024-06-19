@@ -17,7 +17,7 @@ interface IauthenticationController {
 class authenticationController implements IauthenticationController {
   constructor(
     private authService: authenticationService = new authenticationService()
-  ) {}
+  ) { }
 
   async validate(
     req: Request,
@@ -35,6 +35,7 @@ class authenticationController implements IauthenticationController {
 
       next();
     } catch (err) {
+      console.log(err)
       return res.status(400).json({ error: err });
     }
   }

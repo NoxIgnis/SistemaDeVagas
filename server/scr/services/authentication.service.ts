@@ -1,9 +1,3 @@
-/**
- * Esse classe é responsável por conter a lógica de negócio da aplicação
- * Ela utiliza o MessageRepository para realizar operações no banco de dados
- * Nessa classe por exemplo, são gerados os IDs, entre outros
- */
-
 import config from '../configs/config';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { authenticationRepository } from '../repositories/authentication.repository';
