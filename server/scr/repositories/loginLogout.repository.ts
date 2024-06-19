@@ -5,10 +5,12 @@ interface ILoginRepository {
         email: string,
         senha: string
     }): Promise<{ id: string, email: string, tipo: string }>;
+    logados(): Promise<any>;
 }
 
 interface ILogoutRepository {
     logout(token: string, email: string): Promise<boolean>;
+    logados(): Promise<any>;
 }
 
 class loginRepository implements ILoginRepository {
@@ -30,6 +32,9 @@ class loginRepository implements ILoginRepository {
     }): Promise<{ id: string, email: string, tipo: string }> {
         return await this.db.create('lista_token', data);
     }
+    async logados(): Promise<any> {
+        return await this.db.findAll('lista_token', '*');
+    }
 }
 
 class logoutRepository implements ILogoutRepository {
@@ -41,6 +46,9 @@ class logoutRepository implements ILogoutRepository {
     async logout(token: string, email: string): Promise<boolean> {
         const delet = await this.db.delete('lista_token', { token: token, email: email });
         return delet ? true : false;
+    }
+    async logados(): Promise<any> {
+        return await this.db.findAll('lista_token', '*');
     }
 }
 

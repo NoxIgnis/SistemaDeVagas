@@ -74,7 +74,8 @@ class vagasService implements IVagasService {
         try {
             if (token) {
                 const decoded = jwt.verify(token[1], config.jwt.secret) as JwtPayload
-                return await this.repository.getVagas(decoded.email);
+                const send = (decoded.tipo == '1') ? decoded.email : false;
+                return await this.repository.getVagas(send);
             }
             return;
         } catch (err) {

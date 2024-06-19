@@ -5,6 +5,9 @@ import { UsuarioComponent } from './views/usuario/usuario.component';
 import { CadastroComponent } from './views/cadastro/cadastro/cadastro.component';
 import { VagasComponent } from './views/vagas/vagas.component';
 import { VagaComponent } from './views/vaga/vaga.component';
+import { ListaVagasComponent } from './views/lista-vagas/lista-vagas.component';
+import { CandidatoVagaComponent } from './views/candidato-vaga/candidato-vaga.component'
+import { BuscarComponent } from './views/buscar/buscar.component';
 
 export const routes: Routes = [
   {
@@ -24,11 +27,23 @@ export const routes: Routes = [
     component: CadastroComponent,
   },
   {
-    path: 'vagas',
+    path: 'empresa/vagas',
     component: VagasComponent,
   },
   {
     path: 'vaga/:id',
     component: VagaComponent,
+  },
+  {
+    path: 'vagas',
+    component: ListaVagasComponent,
+  },
+  {
+    path: 'candidato/vaga/:id',
+    component: CandidatoVagaComponent,
+  },
+  {
+    path: 'buscar/candidato',
+    component: BuscarComponent,
   },
 ];

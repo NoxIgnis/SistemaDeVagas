@@ -1,0 +1,8 @@
+<div class="nav-login"><nav-bar [variant]="'retangulo-head'"></nav-bar></div>
+<div>
+  @for (vaga of vagas; track vaga) {
+  <h2>{{ vaga.titulo }}</h2>
+  <p>{{ vaga.descricao }}</p>
+  <button (click)="viewDetailsCandidato(vaga.id)">Ver Detalhes</button>
+  }
+</div>

@@ -1,0 +1,53 @@
+<div class="nav-login"><nav-bar [variant]="'retangulo-head'"></nav-bar></div>
+<div class="background-page">
+  <div class="content">
+    <section [formGroup]="dadosForm" class="retangulo">
+      <h3 class="label-login">Dados</h3>
+      <section class="section-form">
+        <form class="form-login">
+          <label for="titulo">titulo</label>
+          <input id="titulo" formControlName="titulo" readonly /><br />
+          <label for="experiencia">experiencia</label>
+          <input
+            id="experiencia"
+            formControlName="experiencia"
+            readonly
+          /><br />
+          <label for="salario_max">salario max</label>
+          <input
+            id="salario_max"
+            formControlName="salario_max"
+            readonly
+          /><br />
+          <label for="salario_min">salario min</label>
+          <input
+            id="salario_min"
+            formControlName="salario_min"
+            readonly
+          /><br />
+          <label for="descricao">descricao</label>
+          <input id="descricao" formControlName="descricao" readonly /><br />
+          <label for="ramo_id">Ramos</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Selecione'"
+            [settings]="dropdownSettings"
+            [data]="dropdownList"
+            [disabled]="true"
+            formControlName="ramo_id"
+          >
+          </ng-multiselect-dropdown>
+          <h3 class="label-login">Competencias</h3>
+          <label for="competencias">Competencias</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Selecione'"
+            [settings]="dropdownSettingsComp"
+            [data]="dropdownListComp"
+            [disabled]="true"
+            formControlName="competencias"
+          >
+          </ng-multiselect-dropdown>
+        </form>
+      </section>
+    </section>
+  </div>
+</div>
