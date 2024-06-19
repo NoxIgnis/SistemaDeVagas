@@ -86,10 +86,7 @@ class VagasController implements IVagasController {
             const token: string[] = req.headers['authorization']?.split(' ') ?? [];
             if (!token) return res.status(400).json({ error: 'Error update' });
 
-            const body = bodySchema.parse(req.body);
-            if (body.experiencia) {
-                body.experiencia = JSON.stringify(body.experiencia)
-            }
+            const body = vagaSchema.parse(req.body);
             if (body.competencias) {
                 body.competencias = JSON.stringify(body.competencias)
             }

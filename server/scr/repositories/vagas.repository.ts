@@ -38,8 +38,8 @@ interface IVagas {
 interface IVagasRepository {
     getVaga(email: string, id: string): Promise<IVaga>;
     getVagas(email: string, id: string): Promise<IVagas>;
-    insertVaga(email: string, id: string): Promise<IVaga>;
-    updateVaga(email: string, id: string): Promise<any>;
+    insertVaga(body: any): Promise<IVaga>;
+    updateVaga(email: string, body: any): Promise<any>;
     deleteVaga(email: string, id: string): Promise<any>;
 }
 
@@ -54,16 +54,17 @@ class vagasRepository implements IVagasRepository {
         return select[0];
     }
 
-    async getVagas(where: any): Promise<IVagas> {
-        return await this.db.findAll('vagas', '*');
+    async getVagas(email: string): Promise<IVagas> {
+        if (email) { return await this.db.find('vagas', '*', { empresa: email }); }
+        else { return await this.db.find('vagas', '*', { ativo: 1 }); }
     }
 
     async insertVaga(body: any): Promise<any> {
         return await this.db.create('vagas', body);
     }
 
-    async updateVaga(id: string, body: any): Promise<any> {
-        return await this.db.update('vagas', body, 'id', { id: id });
+    async updateVaga(email: string, body: any): Promise<any> {
+        return await this.db.update('vagas', body, 'id', { empresa: email });
     }
 
     async deleteVaga(id: string): Promise<any> {
