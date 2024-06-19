@@ -8,13 +8,12 @@ import { environment } from '../../environments/environment';
 })
 export class LogoutService {
   private _logoutEndpoint = `${environment.apiUrl}/logout`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   sendLogout(): Observable<logoutResponse> {
-    
     const token = localStorage.getItem('token') ?? '';
-    return this.http.post<logoutResponse>(this._logoutEndpoint, '',{
-      headers:{Authorization: 'Bearer ' + token} 
+    return this.http.post<logoutResponse>(this._logoutEndpoint, '', {
+      headers: { Authorization: 'Bearer ' + token }
     });
   }
 }

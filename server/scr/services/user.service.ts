@@ -17,10 +17,12 @@ interface IgetUser {
     competencias?: string;
     experiencia?: string;
     ramo?: string;
+    vagas?: string;
 }
 
 interface IuserService {
     getUser(token: string[]): Promise<IgetUser | void>;
+    insertUser(body: any): Promise<boolean>;
     updateUser(token: string[], body: any): Promise<boolean>;
 }
 
@@ -41,6 +43,18 @@ class userService implements IuserService {
                 return await this.userRep.getUser(decoded.email, decoded.id);
             }
             return;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async insertUser(body: any): Promise<boolean> {
+        try {
+            if (body) {
+                const id = await this.userRep.insertUser(body);
+                return id ? true : false;
+            }
+            return false;
         } catch (err) {
             throw err;
         }
