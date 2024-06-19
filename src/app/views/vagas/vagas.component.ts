@@ -72,8 +72,6 @@ export class VagasComponent {
           console.log(error)
           if (error?.error.mensagem) {
             console.log(error);
-            // this.error_message = error?.error.mensagem
-            // this.error_login = false;
           };
         },
       })
@@ -87,8 +85,6 @@ export class VagasComponent {
           console.log(error)
           if (error?.error.mensagem) {
             console.log(error);
-            // this.error_message = error?.error.mensagem
-            // this.error_login = false;
           };
         },
       });
@@ -101,8 +97,6 @@ export class VagasComponent {
         error: (error) => {
           console.log(error)
           if (error?.error.mensagem) {
-            // this.error_message = error?.error.mensagem
-            // this.error_login = false;
           };
         },
       });

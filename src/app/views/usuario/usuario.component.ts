@@ -25,7 +25,7 @@ export class UsuarioComponent {
   validateNome = true;
   variant = '';
   error_login = true;
-  error_message : string = '';
+  error_message: string = '';
   dropdownList = [];
   selectedItems: {
     id: number;
@@ -33,8 +33,8 @@ export class UsuarioComponent {
   }[] = [];
   dropdownSettings: IDropdownSettings = {};
   candidato = false;
-  constructor(private service: GetUserService,  private router: Router) {
-    const token  = localStorage.getItem('token') ?? ''
+  constructor(private service: GetUserService, private router: Router) {
+    const token = localStorage.getItem('token') ?? ''
     this.dadosForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       nome: new FormControl('', [Validators.required]),
@@ -55,14 +55,14 @@ export class UsuarioComponent {
       unSelectAllText: 'UnSelect All',
       allowSearchFilter: true
     };
-    
-    if(token){
+
+    if (token) {
       this.service.getUser().subscribe({
         next: (resp) => {
           console.log(resp)
-          this.dadosForm.patchValue({email: resp?.email, nome: resp?.nome});
-          if(resp?.tipo.toLowerCase() == 'candidato'){
-            resp?.experiencia?.forEach((exp)=>{
+          this.dadosForm.patchValue({ email: resp?.email, nome: resp?.nome });
+          if (resp?.tipo.toLowerCase() == 'candidato') {
+            resp?.experiencia?.forEach((exp) => {
               this.dadosForm.patchValue({
                 empresa: exp.nome_empresa,
                 fim: exp.fim,
@@ -70,14 +70,14 @@ export class UsuarioComponent {
                 cargo: exp.cargo,
               })
             })
-            
-            resp?.competencias?.forEach((comp)=>{
+
+            resp?.competencias?.forEach((comp) => {
               this.selectedItems.push(comp);
             })
             this.dadosForm.patchValue({
               competencias: this.selectedItems
             });
-          }else{
+          } else {
             this.candidato = true;
             this.dadosForm.patchValue({
               ramo: resp.ramo,
@@ -93,7 +93,7 @@ export class UsuarioComponent {
           };
         },
       });
-      if(!this.candidato){
+      if (!this.candidato) {
         this.service.getCompetencias().subscribe({
           next: (resp) => {
             console.log(resp)
@@ -134,7 +134,7 @@ export class UsuarioComponent {
         .subscribe({
           next: (resp) => {
             console.log(resp)
-              this.router.navigate(['/usuario']);
+            this.router.navigate(['/usuario']);
           },
           error: (error) => {
             console.log(error)
@@ -152,36 +152,36 @@ export class UsuarioComponent {
   }
 
   onDelete() {
-      this.service
-        .deleteUser()
-        .subscribe({
-          next: (resp) => {
-            console.log(resp)
-            localStorage.removeItem('token')
-              this.router.navigate(['/']);
-          },
-          error: (error) => {
-            console.log(error)
-            if (error?.error.mensagem) {
-              this.error_message = error?.error.mensagem
-              this.error_login = false;
-              this.dadosForm.reset();
-            };
-          },
-        });
+    this.service
+      .deleteUser()
+      .subscribe({
+        next: (resp) => {
+          console.log(resp)
+          localStorage.removeItem('token')
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          console.log(error)
+          if (error?.error.mensagem) {
+            this.error_message = error?.error.mensagem
+            this.error_login = false;
+            this.dadosForm.reset();
+          };
+        },
+      });
   }
 
-  onItemSelect(event: any){
+  onItemSelect(event: any) {
     this.selectedItems.push(event);
   }
-  onItemDeselect(event: any){
+  onItemDeselect(event: any) {
     this.selectedItems = this.selectedItems.filter(item => item?.id !== event?.id)
   }
-  onSelectAll(event: any){ 
+  onSelectAll(event: any) {
     this.selectedItems = [];
     this.selectedItems.push(event);
   }
-  onDeSelectAll(event: any){
+  onDeSelectAll(event: any) {
     this.selectedItems = [];
   }
 }
