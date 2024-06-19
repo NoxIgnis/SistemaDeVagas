@@ -17,32 +17,33 @@ export class HeaderComponent {
   @Input() login: boolean = false;
   @Input() variant: localVariants = 'retangulo-head';
   @Input() user: boolean = false;
+  @Input() empresa: boolean = false;
 
   constructor(private service: LogoutService, private router: Router) {
-    const token  = localStorage.getItem('token') ?? ''
-     this.user = this.router.url == '/usuario'
+    const token = localStorage.getItem('token') ?? ''
+    this.user = this.router.url == '/usuario'
     // || this.router.url == '/login'
-    if(token) this.login = true; // Atribui a URL atual a uma variável
+    if (token) this.login = true; // Atribui a URL atual a uma variável
   }
 
   onSubmit() {
-      this.service
-        .sendLogout()
-        .subscribe({
-          next: (resp) => {
-            console.log(resp)
-            if (resp?.mensagem) {
-              localStorage.removeItem('token')
-              this.login = false;
-              this.router.navigate(['/']);
-            };
-          },
-          error: (error) => {
-            console.log(error)
-            if (error?.error.mensagem) {
-              alert(error?.error.mensagem)
-            };
-          },
-        });
+    this.service
+      .sendLogout()
+      .subscribe({
+        next: (resp) => {
+          console.log(resp)
+          if (resp?.mensagem) {
+            localStorage.removeItem('token')
+            this.login = false;
+            this.router.navigate(['/']);
+          };
+        },
+        error: (error) => {
+          console.log(error)
+          if (error?.error.mensagem) {
+            alert(error?.error.mensagem)
+          };
+        },
+      });
   }
 }

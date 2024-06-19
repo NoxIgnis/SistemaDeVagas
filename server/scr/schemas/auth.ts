@@ -35,3 +35,15 @@ export const bodySchema = z.object({
   ramo: z.string().optional(),
   tipo: z.boolean().optional(),
 });
+
+// Define the main schema for the payload
+export const vagaSchema = z.object({
+  ramo_id: z.number(),
+  titulo: z.string(),
+  descricao: z.string(),
+  competencias: z.union([competencias, z.string()]),
+  experiencia: z.number(),
+  salario_min: z.number(),
+  salario_max: z.number(),
+  ativo: z.boolean(),
+});
