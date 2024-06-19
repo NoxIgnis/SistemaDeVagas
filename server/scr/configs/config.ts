@@ -14,10 +14,9 @@ export default {
       user: getEnv('DB_USER'),
       password: getEnv('DB_PASS') ?? '',
       database: getEnv('DB_DATABASE'),
-      // ssl: { rejectUnauthorized: false },
     },
   },
-  jwt:{
+  jwt: {
     secret: getEnv('JWT_SECRET_KEY'),
     expires: getEnv('JWT_EXPIRE')
   }
