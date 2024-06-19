@@ -31,8 +31,11 @@
     <h1 class="label-login">Candidatos</h1>
     @for (candidato of candidatos; track candidato) {
     <h2>{{ candidato.nome }}</h2>
-    <p>{{ candidato.competencias }}</p>
-    <button (click)="viewDetailsCandidato(candidato.id)">Ver Detalhes</button>
+    <h4>Competencias</h4>
+    @for (competencia of candidato.competencias; track competencia) {
+    <p>{{ competencia.nome }}</p>
+    }
+    <button (click)="SendMensage(candidato)">Ver Detalhes</button>
     }
   </div>
 </div>

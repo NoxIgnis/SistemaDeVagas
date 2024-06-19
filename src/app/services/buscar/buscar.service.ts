@@ -10,13 +10,13 @@ import { environment } from '../../environments/environment';
 export class BuscarService {
 
   private _getCompEndpoint = `${environment.apiUrl}/competencias`;
-  private _getCandidatos = `${environment.apiUrl}/usuarios/candidatos/buscar`;
+  private _getCandidatos = `${environment.apiUrl}/usuarios/candidatos`;
 
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<user> {
     const token = localStorage.getItem('token') ?? '';
-    return this.http.get<user>(this._getCandidatos, {
+    return this.http.get<user>(`${this._getCandidatos}/buscar`, {
       headers: { Authorization: 'Bearer ' + token }
     });
   }
@@ -25,15 +25,10 @@ export class BuscarService {
     nome?: string,
     competencias?: { id: number }[],
     experiencia?: number,
-  }): Observable<user> {
+  }): Observable<any> {
     const token = localStorage.getItem('token') ?? '';
-    // const data = {
-    //   nome: nome,
-    //   competencias: competencias ?? [],
-    //   experiencia: experiencia,
-    // }
     console.log(data);
-    return this.http.post<user>(this._getCandidatos, data, {
+    return this.http.post<any>(`${this._getCandidatos}/buscar`, data, {
       headers: { Authorization: 'Bearer ' + token }
     });
   }
@@ -45,35 +40,11 @@ export class BuscarService {
     });
   }
 
-  // sendEdit({
-  //   email,
-  //   nome,
-  //   experiencia,
-  //   competencias,
-  //   ramo,
-  //   descricao
-  // }: {
-  //   email: string;
-  //   nome: string;
-  //   competencias?: {
-  //     id: number;
-  //     nome: string;
-  //   }[];
-  //   experiencia?: {
-  //     id: number;
-  //     nome_empresa: string;
-  //     inicio: string;
-  //     fim: string;
-  //     cargo: string;
-  //   }[];
-  //   ramo?: string;
-  //   descricao?: string;
-  // }): Observable<mensagem> {
-  //   const data = { email, nome, experiencia, competencias, ramo, descricao };
-  //   console.log(data)
-  //   const token = localStorage.getItem('token') ?? '';
-  //   return this.http.put<mensagem>(this._getUserEndpoint, data, {
-  //     headers: { Authorization: 'Bearer ' + token }
-  //   });
-  // }
+  sendMensagem(data: { candidato: string, mensagem: string }): Observable<any> {
+    console.log(data)
+    const token = localStorage.getItem('token') ?? '';
+    return this.http.post<any>(`${this._getCandidatos}/mensagem`, data, {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+  }
 }
