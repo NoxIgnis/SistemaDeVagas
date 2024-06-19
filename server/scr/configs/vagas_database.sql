@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Jun-2024 às 21:25
+-- Tempo de geração: 19-Jun-2024 às 22:51
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -65,7 +65,29 @@ CREATE TABLE `lista_token` (
 --
 
 INSERT INTO `lista_token` (`id`, `token`, `email`) VALUES
-(39, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxpbkBjYXJsaW4uY29tIiwidmVyc2FvIjoiYTA4MDM4NDgxMTU5MjNkYjljODE5MTBmNzcyZTI2ZDgiLCJ0aXBvIjoxLCJpZCI6OSwiaWF0IjoxNzE4ODIxODM2fQ.q4Gc53cvwyphB_2al5T5JvWkAQtqUvy5KnKQh5zhTrw', 'carlin@carlin.com');
+(41, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsInZlcnNhbyI6IjJkNDBmNTkwZmY1NTFjZDk0Yzc1ZjcxYTZlMDBlMjY2IiwidGlwbyI6MCwiaWQiOjEsImlhdCI6MTcxODgzMDE3Nn0.W61nyQQna_Rxl5EBQR4G17oH3nTmre0M3yxGf02wtbQ', 'teste@teste.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `mensagem`
+--
+
+CREATE TABLE `mensagem` (
+  `id` int(10) NOT NULL,
+  `empresa` varchar(100) NOT NULL,
+  `candidato` varchar(100) NOT NULL,
+  `mensagem` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `mensagem`
+--
+
+INSERT INTO `mensagem` (`id`, `empresa`, `candidato`, `mensagem`) VALUES
+(1, 'carlin@carlin.com', 'teste@teste.com', 'Gostaria de entrar em contato, envie um email para carlin@carlin.com'),
+(2, 'carlin@carlin.com', 'carlin2@carlin2.com', 'Gostaria de entrar em contato, envie um email para carlin@carlin.com'),
+(3, 'carlin@carlin.com', 'h@h.com', 'Gostaria de entrar em contato, envie um email para carlin@carlin.com');
 
 -- --------------------------------------------------------
 
@@ -163,6 +185,12 @@ ALTER TABLE `lista_token`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `mensagem`
+--
+ALTER TABLE `mensagem`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `ramos`
 --
 ALTER TABLE `ramos`
@@ -188,7 +216,13 @@ ALTER TABLE `competencias`
 -- AUTO_INCREMENT de tabela `lista_token`
 --
 ALTER TABLE `lista_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT de tabela `mensagem`
+--
+ALTER TABLE `mensagem`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `ramos`

@@ -8,7 +8,6 @@ import { VagaComponent } from './views/vaga/vaga.component';
 import { ListaVagasComponent } from './views/lista-vagas/lista-vagas.component';
 import { CandidatoVagaComponent } from './views/candidato-vaga/candidato-vaga.component'
 import { BuscarComponent } from './views/buscar/buscar.component';
-
 export const routes: Routes = [
   {
     path: '',

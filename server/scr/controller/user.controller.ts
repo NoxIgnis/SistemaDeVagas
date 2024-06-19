@@ -3,7 +3,7 @@ import config from '../configs/config';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { userService } from '../services/user.service';
 import md5 from 'blueimp-md5';
-import { bodySchema } from '../schemas/auth';
+import { bodySchema, mensagemSchema } from '../schemas/auth';
 
 interface IUserController {
     getUser(req: Request, res: Response): Promise<Response>;
@@ -98,6 +98,19 @@ class UserController implements IUserController {
             console.log(resp)
             if (!resp) return res.status(400).json({ error: 'Error delete' });
             return res.status(200).json({ mensagem: 'delete OK' });
+        } catch (err) {
+            return res.status(400).json({ error: err });
+        }
+    }
+
+    async inserirMensagem(req: Request, res: Response): Promise<Response> {
+        try {
+            const token: string[] = req.headers['authorization']?.split(' ') ?? [];
+            if (!token) return res.status(400).json({ error: 'Error Insert' });
+            const body = mensagemSchema.parse(req.body);
+            const resp = await this.userServ.insertMensagem(token[1], body)
+            if (!resp) return res.status(400).json({ error: 'Error Insert' });
+            return res.status(200).json({ menssagem: 'Insert OK' });
         } catch (err) {
             return res.status(400).json({ error: err });
         }

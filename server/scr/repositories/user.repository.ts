@@ -40,6 +40,10 @@ class userRepository implements IuserRepository {
     async deleteUser(id: string): Promise<any> {
         return await this.db.delete('usuario', { id: id });
     }
+
+    async insertMensagem(body: any): Promise<any> {
+        return await this.db.create('mensagem', body);
+    }
 }
 
 

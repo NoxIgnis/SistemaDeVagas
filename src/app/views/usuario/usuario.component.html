@@ -2,61 +2,56 @@
 <div class="background-page">
   <div class="content">
     <section [formGroup]="dadosForm" class="retangulo">
-        <h3 class="label-login">Dados</h3>
-        <section class="section-form">
-          <form class="form-login">
-            <label for="nome">Nome</label>
-            <input id="nome" formControlName="nome" />
-            @if(!validateNome){<span class="error-login">nome is required</span
-            >}
-            <label for="email">Email</label>
-            <input id="email" formControlName="email" />
-            @if(!emailPassword){<span class="error-login">email is required</span
-            >}
-            @if(!candidato){
-              <h3 class="label-login">Competencias</h3>
-              <label for="competencias">Competencias</label>
-              <ng-multiselect-dropdown
-                [placeholder]="'Selecione'"
-                [settings]="dropdownSettings"
-                [data]="dropdownList"
-                (onSelect)="onItemSelect($event)"
-                (onDeSelect) = "onItemDeselect($event)"
-                (onSelectAll)="onSelectAll($event)"
-                (onDeSelectAll) = "onDeSelectAll($event)"
-                formControlName="competencias"
-                >
-              </ng-multiselect-dropdown>
-              <h3 class="label-login">Expericia</h3>
-              <label for="empresa">empresa</label>
-              <input id="empresa" formControlName="empresa" />
-              <label for="inicio">inicio</label>
-              <input id="inicio" formControlName="inicio" />
-              <label for="fim">fim</label>
-              <input id="fim" formControlName="fim" />
-              <label for="cargo">cargo</label>
-              <input id="cargo" formControlName="cargo" />
-              @if(!error_login){<div class = "error-generic"><h3>{{error_message}}</h3></div>}
-            }@else{
-              <label for="ramo">ramo</label>
-              <input id="ramo" formControlName="ramo" />
-              <label for="descricao">descricao</label>
-              <input id="descricao" formControlName="descricao" />
-            }
-            <section class="btn-login">
-              <submit-button
-                btn-text="Atualizar"
-                (submit)="onSubmit()"
-              />
-            </section>
-            <section class="btn-delete">
-              <submit-button
-                btn-text="Deletar"
-                (submit)="onDelete()"
-              />
-            </section>
-          </form>
-        </section>
+      <h3 class="label-login">Dados</h3>
+      <section class="section-form">
+        <form class="form-login">
+          <label for="nome">Nome</label>
+          <input id="nome" formControlName="nome" />
+          @if(!validateNome){<span class="error-login">nome is required</span>}
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" />
+          @if(!emailPassword){<span class="error-login">email is required</span
+          >} @if(!candidato){
+          <h3 class="label-login">Competencias</h3>
+          <label for="competencias">Competencias</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Selecione'"
+            [settings]="dropdownSettings"
+            [data]="dropdownList"
+            (onSelect)="onItemSelect($event)"
+            (onDeSelect)="onItemDeselect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelectAll)="onDeSelectAll($event)"
+            formControlName="competencias"
+          >
+          </ng-multiselect-dropdown>
+          <h3 class="label-login">Expericia</h3>
+          <label for="empresa">empresa</label>
+          <input id="empresa" formControlName="empresa" />
+          <label for="inicio">inicio</label>
+          <input id="inicio" formControlName="inicio" />
+          <label for="fim">fim</label>
+          <input id="fim" formControlName="fim" />
+          <label for="cargo">cargo</label>
+          <input id="cargo" formControlName="cargo" />
+          @if(!error_login){
+          <div class="error-generic">
+            <h3>{{ error_message }}</h3>
+          </div>
+          } }@else{
+          <label for="ramo">ramo</label>
+          <input id="ramo" formControlName="ramo" />
+          <label for="descricao">descricao</label>
+          <input id="descricao" formControlName="descricao" />
+          }
+          <section class="btn-login">
+            <submit-button btn-text="Atualizar" (submit)="onSubmit()" />
+          </section>
+          <section class="btn-delete">
+            <submit-button btn-text="Deletar" (submit)="onDelete()" />
+          </section>
+        </form>
       </section>
+    </section>
   </div>
 </div>

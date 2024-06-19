@@ -54,3 +54,9 @@ export const buscarSchema = z.object({
   experiencia: z.number().optional(),
   tipo: z.boolean().optional(),
 });
+
+export const mensagemSchema = z.object({
+  candidato: z.string(),
+  mensagem: z.string(),
+  empresa: z.string().optional(),
+});

@@ -85,6 +85,21 @@ class userService implements IuserService {
             throw err;
         }
     }
+
+    async insertMensagem(token: string, body: any): Promise<boolean> {
+        try {
+            if (body) {
+                const decoded = jwt.verify(token, config.jwt.secret) as JwtPayload
+                body.empresa = decoded.email
+                body.mensagem = `${body.mensagem} ${decoded.email}`
+                const id = await this.userRep.insertMensagem(body);
+                return id ? true : false;
+            }
+            return false;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 export { userService };

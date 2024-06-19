@@ -55,32 +55,7 @@ export class BuscarComponent {
             this.service.getUser().subscribe({
                 next: (resp: any) => {
                     console.log(resp)
-                    this.candidatos = resp;
-
-                    // this.dadosForm.patchValue({ email: resp?.email, nome: resp?.nome });
-                    // if (resp?.tipo.toLowerCase() == 'candidato') {
-                    //     resp?.experiencia?.forEach((exp: any) => {
-                    //         this.dadosForm.patchValue({
-                    //             empresa: exp.nome_empresa,
-                    //             fim: exp.fim,
-                    //             inicio: exp.inicio,
-                    //             cargo: exp.cargo,
-                    //         })
-                    //     })
-
-                    //     resp?.competencias?.forEach((comp: any) => {
-                    //         this.selectedItems.push(comp);
-                    //     })
-                    //     this.dadosForm.patchValue({
-                    //         competencias: this.selectedItems
-                    //     });
-                    // } else {
-                    //     this.candidato = true;
-                    //     this.dadosForm.patchValue({
-                    //         ramo: resp.ramo,
-                    //         descricao: resp.descricao,
-                    //     })
-                    // }
+                    this.candidatos = resp?.candidatos;
                 },
                 error: (error: any) => {
                     console.log(error)
@@ -108,7 +83,6 @@ export class BuscarComponent {
         }
     }
     onSubmit() {
-        console.log(this.selectedItems)
         this.service
             .getUserFiltrado({
                 nome: this.dadosForm.value.nome != '' ? this.dadosForm.value.nome : undefined,
@@ -118,7 +92,7 @@ export class BuscarComponent {
             .subscribe({
                 next: (resp) => {
                     console.log(resp)
-                    this.candidatos = resp;
+                    this.candidatos = resp?.candidatos;
                 },
                 error: (error) => {
                     console.log(error)
@@ -147,7 +121,25 @@ export class BuscarComponent {
     onDeSelectAll(event: any) {
         this.selectedItems = [];
     }
-    viewDetailsCandidato(id: number): void {
-        this.router.navigate(['candidato/candidato/', id]);
+    SendMensage(candidato: any) {
+        console.log(candidato)
+
+        this.service
+            .sendMensagem({
+                candidato: candidato.email,
+                mensagem: 'Gostaria de entrar em contato, envie um email para',
+            })
+            .subscribe({
+                next: (resp) => {
+                    console.log(resp)
+                },
+                error: (error) => {
+                    console.log(error)
+                    if (error?.error.mensagem) {
+                        this.error_message = error?.error.mensagem
+                        this.error_login = false;
+                    };
+                },
+            });
     }
 }
