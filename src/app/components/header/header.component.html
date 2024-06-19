@@ -9,6 +9,17 @@
       <li><a href="#">Espaço</a></li>
       <li><a href="#">Sobre</a></li>
       <li><a href="#">Contato</a></li>
+      @if(!empresa){
+      <li>
+        <a
+          routerLink="/vagas"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          >Vagas</a
+        >
+      </li>
+      }
     </ul>
     @if(!login){
     <div class="login">
@@ -22,13 +33,18 @@
     </div>
     }@else if(!user){
     <div class="menu">
-      <li><a routerLink="/usuario"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        ariaCurrentWhenActive="page">Usuario</a></li>
+      <li>
+        <a
+          routerLink="/usuario"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          >Usuario</a
+        >
+      </li>
     </div>
     }@else if(user){
-      <submit-button btn-text="Logout" (submit)="onSubmit()" />
+    <submit-button btn-text="Logout" (submit)="onSubmit()" />
     }
   </nav>
 </div>

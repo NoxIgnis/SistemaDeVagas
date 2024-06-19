@@ -16,11 +16,21 @@ import {
   competenciasController
 } from '../controller/competencia.controller';
 
+import {
+  RamosController
+} from '../controller/ramos.controller';
+
+import {
+  VagasController
+} from '../controller/vagas.controller';
+
 const authController = new authenticationController()
 const loginController = new LoginController()
 const logoutController = new LogoutController()
 const userController = new UserController()
 const compController = new competenciasController()
+const ramosController = new RamosController()
+const vagasController = new VagasController()
 
 const baseRoute = express.Router();
 
@@ -29,6 +39,13 @@ baseRoute.post('/logout', authController.validate.bind(authController), logoutCo
 baseRoute.get('/usuario', authController.validate.bind(authController), userController.getUser.bind(userController));
 baseRoute.put('/usuario', authController.validate.bind(authController), userController.updateUser.bind(userController));
 baseRoute.delete('/usuario', authController.validate.bind(authController), userController.deleteUser.bind(userController));
+baseRoute.get('/ramos', authController.validate.bind(authController), ramosController.getRamos.bind(ramosController));
 baseRoute.get('/competencias', authController.validate.bind(authController), compController.getCompetencias.bind(compController));
+
+baseRoute.post('/vagas', vagasController.insertVaga.bind(vagasController));
+baseRoute.put('/vagas/:id_vaga', vagasController.updateVaga.bind(vagasController));
+baseRoute.delete('/vagas/:id_vaga', vagasController.deleteVaga.bind(vagasController));
+baseRoute.get('/vagas/:id_vaga', vagasController.getVaga.bind(vagasController));
+baseRoute.get('/vagas', vagasController.getVagas.bind(vagasController));
 
 export { baseRoute };
