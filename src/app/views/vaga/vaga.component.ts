@@ -64,10 +64,45 @@ export class VagaComponent {
         unSelectAllText: 'UnSelect All',
         allowSearchFilter: true
       };
+      this.service.getCompetencias().subscribe({
+        next: (resp) => {
+          console.log(resp)
+          this.dropdownListComp = resp;
+        },
+        error: (error) => {
+          console.log(error)
+          if (error?.error.mensagem) {
+            console.log(error);
+          };
+        },
+      });
+      this.service.getRamos().subscribe({
+        next: (resp) => {
+          console.log(resp)
+          this.dropdownList = resp;
+        },
+        error: (error) => {
+          console.log(error)
+          if (error?.error.mensagem) {
+            console.log(error);
+          };
+        },
+      });
       this.service.GetVaga(id).subscribe({
         next: (resp) => {
           console.log(resp)
           this.dadosForm.patchValue(resp);
+          if (resp?.competencias) {
+            resp?.competencias?.forEach((comp: any) => {
+              this.selectedItemsComp.push(comp);
+            })
+          }
+          if (resp?.ramo_id) {
+            this.selectedItems = resp?.ramo_id
+            this.dadosForm.patchValue({
+              ramo_id: this.dropdownList.filter((f: any) => f.id == resp?.ramo_id)
+            });
+          }
         },
         error: (error) => {
           console.log(error)
@@ -85,6 +120,7 @@ export class VagaComponent {
     if (this.dadosForm.valid) {
       this.service
         .sendEdit({
+          id: Number(this.dadosForm.value.id),
           titulo: this.dadosForm.value.titulo,
           salario_max: Number(this.dadosForm.value.salario_max),
           salario_min: Number(this.dadosForm.value.salario_min),
@@ -130,7 +166,6 @@ export class VagaComponent {
   }
 
   onItemSelectSingle(event: any) {
-    console.log(event)
     this.selectedItems = event.id;
   }
 

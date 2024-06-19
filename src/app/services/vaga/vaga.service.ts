@@ -13,10 +13,10 @@ export class VagaService {
   private _getCompEndpoint = `${environment.apiUrl}/competencias`;
   constructor(private http: HttpClient) { }
 
-  GetVaga(id: string): Observable<any[]> {
+  GetVaga(id: string): Observable<any> {
     const token = localStorage.getItem('token') ?? '';
     console.log('test', this._getVagaEndpoint);
-    return this.http.get<any[]>(this._getVagaEndpoint + '/' + id, {
+    return this.http.get<any>(this._getVagaEndpoint + '/' + id, {
       headers: { Authorization: 'Bearer ' + token }
     });
   }
@@ -43,10 +43,6 @@ export class VagaService {
   }
 
   sendEdit(data: any, id: string): Observable<mensagem> {
-    data.ativo = true;
-    data.ramo_id = 3;
-    // data.competencias = [];
-    // const data = { email, nome, experiencia ,competencias, ramo, descricao};
     console.log(data)
     const token = localStorage.getItem('token') ?? '';
     return this.http.put<mensagem>(this._getVagaEndpoint + '/' + id, data, {
