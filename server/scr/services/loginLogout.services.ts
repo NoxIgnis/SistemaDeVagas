@@ -13,9 +13,11 @@ interface ILoginService {
         email: string,
         senha: string
     }): Promise<{ id: string, email: string, tipo: string } | void>;
+    logado(): Promise<any>;
 }
 interface ILogoutService {
     logout(token: string): Promise<boolean>;
+    logado(): Promise<any>;
 }
 
 class loginService implements ILoginService {
@@ -50,6 +52,14 @@ class loginService implements ILoginService {
             throw err;
         }
     }
+
+    async logado(): Promise<any> {
+        try {
+            return await this.loginRep.logados();
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 class logoutService implements ILogoutService {
     constructor(
@@ -63,6 +73,14 @@ class logoutService implements ILogoutService {
                 return await this.logoutRep.logout(token, decoded.email);
             }
             return false;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async logado(): Promise<any> {
+        try {
+            return await this.logoutRep.logados();
         } catch (err) {
             throw err;
         }

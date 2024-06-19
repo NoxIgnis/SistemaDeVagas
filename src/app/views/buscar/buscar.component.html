@@ -1,0 +1,38 @@
+<div class="nav-login"><nav-bar [variant]="'retangulo-head'"></nav-bar></div>
+<div class="background-page">
+  <section [formGroup]="dadosForm" class="retangulo">
+    <h3 class="label-login">Filtro</h3>
+    <section class="section-form">
+      <form class="form-login">
+        <label for="nome">Nome</label>
+        <input id="nome" formControlName="nome" />
+        <label for="experiencia">experiencia</label>
+        <input id="experiencia" formControlName="experiencia" /><br />
+        <h3 class="label-login">Competencias</h3>
+        <label for="competencias">Competencias</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Selecione'"
+          [settings]="dropdownSettings"
+          [data]="dropdownList"
+          (onSelect)="onItemSelect($event)"
+          (onDeSelect)="onItemDeselect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelectAll)="onDeSelectAll($event)"
+          formControlName="competencias"
+        >
+        </ng-multiselect-dropdown>
+        <section class="btn-login">
+          <submit-button btn-text="Filtrar" (submit)="onSubmit()" />
+        </section>
+      </form>
+    </section>
+  </section>
+  <div class="content">
+    <h1 class="label-login">Candidatos</h1>
+    @for (candidato of candidatos; track candidato) {
+    <h2>{{ candidato.nome }}</h2>
+    <p>{{ candidato.competencias }}</p>
+    <button (click)="viewDetailsCandidato(candidato.id)">Ver Detalhes</button>
+    }
+  </div>
+</div>

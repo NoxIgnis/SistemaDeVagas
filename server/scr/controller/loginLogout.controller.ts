@@ -33,6 +33,8 @@ class LoginController implements ILoginController {
       const token_id = await this.loginServ.insertToken({ token: token, email: select.email });
       if (!token_id) return res.status(400).json({ error: 'Error token' });
 
+      const lista_logados = await this.loginServ.logado();
+      console.log(lista_logados);
       return res.json({
         token: token
       });
@@ -51,6 +53,8 @@ class LogoutController implements ILogoutController {
 
       if (!token) return res.status(400).json({ error: 'Error select' });
       await this.logoutServ.logout(token[1] ?? '')
+      const lista_logados = await this.logoutServ.logado();
+      console.log(lista_logados);
       return res.json({ mensagem: 'Logout OK' });
     } catch (err) {
       return res.status(400).json({ error: err });

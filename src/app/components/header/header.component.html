@@ -8,9 +8,27 @@
       <li><a href="#">Home</a></li>
       <li><a href="#">Espaço</a></li>
       <li><a href="#">Sobre</a></li>
-      <li><a href="#">Contato</a></li>
-      @if(!empresa){
       <li>
+        @if(!empresa){
+        <a
+          routerLink="/buscar/candidato"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          >Candidatos</a
+        >
+        }
+      </li>
+      <li>
+        @if(!empresa){
+        <a
+          routerLink="/empresa/vagas"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          >Vagas</a
+        >
+        }@else{
         <a
           routerLink="/vagas"
           routerLinkActive="active"
@@ -18,8 +36,8 @@
           ariaCurrentWhenActive="page"
           >Vagas</a
         >
+        }
       </li>
-      }
     </ul>
     @if(!login){
     <div class="login">

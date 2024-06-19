@@ -19,7 +19,7 @@ const experiencia = z.array(
 const competencias = z.array(
   z.object({
     id: z.number(),
-    nome: z.string(),
+    nome: z.string().optional(),
   })
 ).optional()
 
@@ -36,7 +36,6 @@ export const bodySchema = z.object({
   tipo: z.boolean().optional(),
 });
 
-// Define the main schema for the payload
 export const vagaSchema = z.object({
   ramo_id: z.number(),
   titulo: z.string(),
@@ -46,4 +45,12 @@ export const vagaSchema = z.object({
   salario_min: z.number(),
   salario_max: z.number(),
   ativo: z.boolean(),
+});
+
+export const buscarSchema = z.object({
+  nome: z.string().optional(),
+  descricao: z.string().optional(),
+  competencias: competencias.optional(),
+  experiencia: z.number().optional(),
+  tipo: z.boolean().optional(),
 });
