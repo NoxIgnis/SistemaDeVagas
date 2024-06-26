@@ -55,6 +55,8 @@ baseRoute.delete('/vagas/:id_vaga', vagasController.deleteVaga.bind(vagasControl
 baseRoute.get('/vagas/:id_vaga', vagasController.getVaga.bind(vagasController));
 baseRoute.get('/vagas', vagasController.getVagas.bind(vagasController));
 
+baseRoute.post('/mensagem', userController.inserirMensagem.bind(userController))
+
 // baseRoute.get('/buscar', buscarController.getUsuarios.bind(buscarController))
 // baseRoute.post('/buscar', buscarController.getUsuariosFiltrados.bind(buscarController))
 

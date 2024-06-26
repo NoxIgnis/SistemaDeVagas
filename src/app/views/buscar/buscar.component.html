@@ -35,7 +35,15 @@
     @for (competencia of candidato.competencias; track competencia) {
     <p>{{ competencia.nome }}</p>
     }
-    <button (click)="SendMensage(candidato)">Ver Detalhes</button>
+    <label>Enviar email</label>
+    <input
+      id="candidato_check"
+      type="checkbox"
+      (change)="onCheckboxChange(candidato, $event)"
+    />
     }
+    <br />
+    <br />
+    <button (click)="SendMensage()">Enviar Mensagens</button>
   </div>
 </div>

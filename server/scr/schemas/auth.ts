@@ -56,7 +56,7 @@ export const buscarSchema = z.object({
 });
 
 export const mensagemSchema = z.object({
-  candidato: z.string(),
-  mensagem: z.string(),
+  candidatos: z.array(z.string()),
+  mensagem: z.string().optional(),
   empresa: z.string().optional(),
 });

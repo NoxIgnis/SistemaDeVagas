@@ -8,6 +8,7 @@ import config from '../configs/config';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { userRepository } from '../repositories/user.repository';
 import { logoutRepository } from '../repositories/loginLogout.repository';
+import { ErrorHandler } from '../handlers/errorHandler';
 interface IgetUser {
     id?: string;
     nome?: string;
@@ -89,11 +90,27 @@ class userService implements IuserService {
     async insertMensagem(token: string, body: any): Promise<boolean> {
         try {
             if (body) {
-                const decoded = jwt.verify(token, config.jwt.secret) as JwtPayload
-                body.empresa = decoded.email
-                body.mensagem = `${body.mensagem} ${decoded.email}`
-                const id = await this.userRep.insertMensagem(body);
-                return id ? true : false;
+                const decoded = jwt.verify(token, config.jwt.secret) as JwtPayload;
+                let insert: boolean = false;
+                body.candidatos.forEach(async (cand: any) => {
+                    const body_insert: {
+                        candidato: string,
+                        empresa: string,
+                        mensagem: string
+                    } = {
+                        candidato: cand,
+                        empresa: decoded.email,
+                        mensagem: `Gostaria que entrasse em contato pelo email ${decoded.email}`
+
+                    };
+                    console.log(body_insert)
+                    const id = await this.userRep.insertMensagem(body_insert);
+                    insert = id ? true : false;
+                    if (!insert) {
+                        return false;
+                    }
+                });
+
             }
             return false;
         } catch (err) {

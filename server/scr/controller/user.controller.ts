@@ -108,6 +108,7 @@ class UserController implements IUserController {
             const token: string[] = req.headers['authorization']?.split(' ') ?? [];
             if (!token) return res.status(400).json({ error: 'Error Insert' });
             const body = mensagemSchema.parse(req.body);
+            console.log(body);
             const resp = await this.userServ.insertMensagem(token[1], body)
             if (!resp) return res.status(400).json({ error: 'Error Insert' });
             return res.status(200).json({ menssagem: 'Insert OK' });
