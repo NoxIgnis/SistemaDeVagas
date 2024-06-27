@@ -55,8 +55,15 @@ class VagasController implements IVagasController {
             if (Array.isArray(vagas)) {
                 vagas.forEach((vaga, index) => {
                     vagas[index]?.competencias = JSON.parse(vaga.competencias as unknown as string)
+                    vagas[index]?.ramo = {
+                        id: 1,
+                        nome: "carlos",
+                        descricao: 'justo'
+                    }
+                    delete vagas[index]?.ramo_id
                 });
             }
+            console.log(vagas)
             return res.status(200).json(vagas);
         } catch (err) {
             console.log(err);

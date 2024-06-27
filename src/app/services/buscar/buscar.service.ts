@@ -11,6 +11,7 @@ export class BuscarService {
 
   private _getCompEndpoint = `${environment.apiUrl}/competencias`;
   private _getCandidatos = `${environment.apiUrl}/usuarios/candidatos`;
+  private _getMensagem = `${environment.apiUrl}/mensagem`;
 
   constructor(private http: HttpClient) { }
 
@@ -22,9 +23,9 @@ export class BuscarService {
   }
 
   getUserFiltrado(data?: {
-    nome?: string,
+    // nome?: string,
     competencias?: { id: number }[],
-    experiencia?: number,
+    // experiencia?: number,
   }): Observable<any> {
     const token = localStorage.getItem('token') ?? '';
     console.log(data);
@@ -40,10 +41,10 @@ export class BuscarService {
     });
   }
 
-  sendMensagem(data: { candidato: string, mensagem: string }): Observable<any> {
+  sendMensagem(data: any): Observable<any> {
     console.log(data)
     const token = localStorage.getItem('token') ?? '';
-    return this.http.post<any>(`${this._getCandidatos}/mensagem`, data, {
+    return this.http.post<any>(`${this._getMensagem}`, data, {
       headers: { Authorization: 'Bearer ' + token }
     });
   }

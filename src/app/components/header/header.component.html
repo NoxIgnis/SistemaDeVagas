@@ -19,8 +19,8 @@
         >
         }
       </li>
+      @if(!empresa){
       <li>
-        @if(!empresa){
         <a
           routerLink="/empresa/vagas"
           routerLinkActive="active"
@@ -28,7 +28,10 @@
           ariaCurrentWhenActive="page"
           >Vagas</a
         >
-        }@else{
+      </li>
+
+      }@else{
+      <li>
         <a
           routerLink="/vagas"
           routerLinkActive="active"
@@ -36,8 +39,18 @@
           ariaCurrentWhenActive="page"
           >Vagas</a
         >
-        }
       </li>
+      <li>
+        <a
+          routerLink="/mensagens"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          >mensagens</a
+        >
+      </li>
+
+      }
     </ul>
     @if(!login){
     <div class="login">

@@ -12,7 +12,7 @@ class BuscarRepository implements IBuscarRepository {
     constructor(private db: Database = new Database()) { }
 
     async getUsuarios(): Promise<any> {
-        return await this.db.find('usuario', '*', { tipo: 0 });
+        return await this.db.findMore('usuario', '*', `IF(tipo = 1, 'empresa', 'candidato') as tipo`, { tipo: 0 });
     }
 
     // async getUsuariosFiltrados(body: any): Promise<any> {

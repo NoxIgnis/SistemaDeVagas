@@ -30,6 +30,7 @@ class loginService implements ILoginService {
         senha: string
     }): Promise<{ id: string, email: string, tipo: string } | void> {
         try {
+            console.log(login);
             if (login) {
                 return await this.loginRep.login(login);
             }

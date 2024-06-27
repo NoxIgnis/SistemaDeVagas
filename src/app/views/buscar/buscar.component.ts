@@ -32,13 +32,16 @@ export class BuscarComponent {
     }[] = [];
     dropdownSettings: IDropdownSettings = {};
     candidato = false;
+    candidatos_mensagens: {
+        candidatos: string[]
+    } = { candidatos: [] };
 
     candidatos: any;
     constructor(private service: BuscarService, private router: Router) {
         const token = localStorage.getItem('token') ?? ''
         this.dadosForm = new FormGroup({
-            nome: new FormControl(''),
-            experiencia: new FormControl(0),
+            // nome: new FormControl(''),
+            // experiencia: new FormControl(0),
             competencias: new FormControl([]),
         });
 
@@ -85,9 +88,9 @@ export class BuscarComponent {
     onSubmit() {
         this.service
             .getUserFiltrado({
-                nome: this.dadosForm.value.nome != '' ? this.dadosForm.value.nome : undefined,
+                // nome: this.dadosForm.value.nome != '' ? this.dadosForm.value.nome : undefined,
                 competencias: this.selectedItems.length != 0 ? this.selectedItems : undefined,
-                experiencia: Number(this.dadosForm.value.experiencia) != 0 ? Number(this.dadosForm.value.experiencia) : undefined,
+                // experiencia: Number(this.dadosForm.value.experiencia) != 0 ? Number(this.dadosForm.value.experiencia) : undefined,
             })
             .subscribe({
                 next: (resp) => {
@@ -121,14 +124,9 @@ export class BuscarComponent {
     onDeSelectAll(event: any) {
         this.selectedItems = [];
     }
-    SendMensage(candidato: any) {
-        console.log(candidato)
-
+    SendMensage() {
         this.service
-            .sendMensagem({
-                candidato: candidato.email,
-                mensagem: 'Gostaria de entrar em contato, envie um email para',
-            })
+            .sendMensagem({ candidatos: this.candidatos_mensagens.candidatos })
             .subscribe({
                 next: (resp) => {
                     console.log(resp)
@@ -141,5 +139,14 @@ export class BuscarComponent {
                     };
                 },
             });
+    }
+    onCheckboxChange(candidato: any, event: any) {
+        console.log(candidato);
+        console.log(event.target.checked);
+        if (event.target.checked) {
+            this.candidatos_mensagens.candidatos.push(candidato.email)
+        } else {
+            this.candidatos_mensagens.candidatos = this.candidatos_mensagens.candidatos.filter((can) => can != (candidato.email))
+        }
     }
 }

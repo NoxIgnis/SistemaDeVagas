@@ -1,0 +1,8 @@
+<div class="nav-login"><nav-bar [variant]="'retangulo-head'"></nav-bar></div>
+<div>
+  <h1 class="label-login">Candidatos</h1>
+  @for (mensagem of mensagens; track mensagem) {
+  <h2>{{ mensagem.empresa }}</h2>
+  <p>{{ mensagem.mensagem }}</p>
+  }
+</div>

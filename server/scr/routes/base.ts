@@ -49,11 +49,14 @@ baseRoute.delete('/usuario', authController.validate.bind(authController), userC
 baseRoute.get('/ramos', authController.validate.bind(authController), ramosController.getRamos.bind(ramosController));
 baseRoute.get('/competencias', authController.validate.bind(authController), compController.getCompetencias.bind(compController));
 
-baseRoute.post('/vagas', vagasController.insertVaga.bind(vagasController));
-baseRoute.put('/vagas/:id_vaga', vagasController.updateVaga.bind(vagasController));
-baseRoute.delete('/vagas/:id_vaga', vagasController.deleteVaga.bind(vagasController));
-baseRoute.get('/vagas/:id_vaga', vagasController.getVaga.bind(vagasController));
-baseRoute.get('/vagas', vagasController.getVagas.bind(vagasController));
+baseRoute.post('/vagas', authController.validate.bind(authController), vagasController.insertVaga.bind(vagasController));
+baseRoute.put('/vagas/:id_vaga', authController.validate.bind(authController), vagasController.updateVaga.bind(vagasController));
+baseRoute.delete('/vagas/:id_vaga', authController.validate.bind(authController), vagasController.deleteVaga.bind(vagasController));
+baseRoute.get('/vagas/:id_vaga', authController.validate.bind(authController), vagasController.getVaga.bind(vagasController));
+baseRoute.get('/vagas', authController.validate.bind(authController), vagasController.getVagas.bind(vagasController));
+
+baseRoute.post('/mensagem', authController.validate.bind(authController), userController.inserirMensagem.bind(userController))
+baseRoute.get('/mensagem', authController.validate.bind(authController), userController.getMensagem.bind(userController))
 
 // baseRoute.get('/buscar', buscarController.getUsuarios.bind(buscarController))
 // baseRoute.post('/buscar', buscarController.getUsuariosFiltrados.bind(buscarController))
