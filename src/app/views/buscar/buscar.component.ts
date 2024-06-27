@@ -40,8 +40,8 @@ export class BuscarComponent {
     constructor(private service: BuscarService, private router: Router) {
         const token = localStorage.getItem('token') ?? ''
         this.dadosForm = new FormGroup({
-            nome: new FormControl(''),
-            experiencia: new FormControl(0),
+            // nome: new FormControl(''),
+            // experiencia: new FormControl(0),
             competencias: new FormControl([]),
         });
 
@@ -88,9 +88,9 @@ export class BuscarComponent {
     onSubmit() {
         this.service
             .getUserFiltrado({
-                nome: this.dadosForm.value.nome != '' ? this.dadosForm.value.nome : undefined,
+                // nome: this.dadosForm.value.nome != '' ? this.dadosForm.value.nome : undefined,
                 competencias: this.selectedItems.length != 0 ? this.selectedItems : undefined,
-                experiencia: Number(this.dadosForm.value.experiencia) != 0 ? Number(this.dadosForm.value.experiencia) : undefined,
+                // experiencia: Number(this.dadosForm.value.experiencia) != 0 ? Number(this.dadosForm.value.experiencia) : undefined,
             })
             .subscribe({
                 next: (resp) => {

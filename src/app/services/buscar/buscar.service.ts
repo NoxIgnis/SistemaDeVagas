@@ -23,9 +23,9 @@ export class BuscarService {
   }
 
   getUserFiltrado(data?: {
-    nome?: string,
+    // nome?: string,
     competencias?: { id: number }[],
-    experiencia?: number,
+    // experiencia?: number,
   }): Observable<any> {
     const token = localStorage.getItem('token') ?? '';
     console.log(data);

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import config from '../configs/config';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { userService } from '../services/user.service';
@@ -112,6 +112,29 @@ class UserController implements IUserController {
             const resp = await this.userServ.insertMensagem(token[1], body)
             if (!resp) return res.status(400).json({ error: 'Error Insert' });
             return res.status(200).json({ menssagem: 'Insert OK' });
+        } catch (err) {
+            return res.status(400).json({ error: err });
+        }
+    }
+
+    async getMensagem(req: Request, res: Response): Promise<Response> {
+        try {
+            const token: string[] = req.headers['authorization']?.split(' ') ?? [];
+            if (!token) return res.status(400).json({ error: 'Error get' });
+            const user = await this.userServ.getUser(token)
+            if (!user) return res.status(400).json({ error: 'Error get' });
+            const mensagens: any = await this.userServ.getMensagem(token[1])
+
+            if (!mensagens) return res.status(400).json({ error: 'Error get' });
+            let response: { empresa?: string, mensagem: string, lida: boolean }[] = [];
+            mensagens?.forEach((mensagem: any) => {
+                response.push({
+                    empresa: user?.nome, mensagem: mensagem.mensagem, lida: mensagem.lida == 1 ? true : false
+                })
+            });
+            console.log(response)
+            if (!response) return res.status(400).json({ error: 'Error get' });
+            return res.status(200).json(response);
         } catch (err) {
             return res.status(400).json({ error: err });
         }

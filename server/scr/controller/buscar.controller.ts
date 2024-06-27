@@ -105,7 +105,12 @@ class BuscarController implements IBuscarController {
                     comp.push(JSON.parse(cand.competencias))
                     cand.experiencia = JSON.parse(cand.experiencia);
                     cand.competencias = JSON.parse(cand.competencias);
+
                     map.forEach((id: any) => {
+                        console.log('compMap', comp[index].map((comp: any) =>
+                            comp.id
+                        ))
+
                         const compMap = comp[index].map((comp: any) =>
                             comp.id
                         )
@@ -117,7 +122,9 @@ class BuscarController implements IBuscarController {
 
                             candidatosComp.push(cand)
                         }
+
                     })
+
                 })
 
                 candidatos = candidatosComp
@@ -136,6 +143,7 @@ class BuscarController implements IBuscarController {
                     candidatos[index] = cand;
                 })
             }
+            console.log({ candidatos: candidatos })
             return res.status(200).json({ candidatos: candidatos });
         } catch (err) {
             console.log(err);

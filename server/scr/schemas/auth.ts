@@ -43,7 +43,7 @@ export const vagaSchema = z.object({
   competencias: z.union([competencias, z.string()]),
   experiencia: z.number(),
   salario_min: z.number(),
-  salario_max: z.number(),
+  salario_max: z.number().optional(),
   ativo: z.boolean(),
 });
 

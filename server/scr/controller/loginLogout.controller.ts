@@ -20,7 +20,6 @@ class LoginController implements ILoginController {
       if (!content) return res.status(400).json({ error: 'Content is required' });
 
       const body = loginSchema.parse(content);
-
       const select = await this.loginServ.login(body);
       if (!select) return res.status(400).json({ error: 'Error select' });
       const payload = {

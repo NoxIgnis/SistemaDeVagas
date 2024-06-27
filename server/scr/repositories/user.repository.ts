@@ -44,6 +44,10 @@ class userRepository implements IuserRepository {
     async insertMensagem(body: any): Promise<any> {
         return await this.db.create('mensagem', body);
     }
+
+    async getMensagem(email: string): Promise<any> {
+        return await this.db.find('mensagem', '*', { candidato: email });
+    }
 }
 
 

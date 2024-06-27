@@ -8,6 +8,7 @@ import { VagaComponent } from './views/vaga/vaga.component';
 import { ListaVagasComponent } from './views/lista-vagas/lista-vagas.component';
 import { CandidatoVagaComponent } from './views/candidato-vaga/candidato-vaga.component'
 import { BuscarComponent } from './views/buscar/buscar.component';
+import { MensagemComponent } from './views/mensagem/mensagem.component';
 export const routes: Routes = [
   {
     path: '',
@@ -44,5 +45,9 @@ export const routes: Routes = [
   {
     path: 'buscar/candidato',
     component: BuscarComponent,
+  },
+  {
+    path: 'mensagens',
+    component: MensagemComponent,
   },
 ];

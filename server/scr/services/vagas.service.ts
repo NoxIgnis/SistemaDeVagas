@@ -18,6 +18,11 @@ interface IVaga {
             nome: string;
         }
     ];
+    ramos?: {
+        id: number,
+        nome: string,
+        discricao: string
+    }
     experiencia: number;
     salario_min: number;
     salario_max: number;

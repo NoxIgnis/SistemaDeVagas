@@ -103,14 +103,26 @@ class userService implements IuserService {
                         mensagem: `Gostaria que entrasse em contato pelo email ${decoded.email}`
 
                     };
-                    console.log(body_insert)
                     const id = await this.userRep.insertMensagem(body_insert);
                     insert = id ? true : false;
                     if (!insert) {
                         return false;
                     }
                 });
+                return true;
+            }
+            return false;
+        } catch (err) {
+            throw err;
+        }
+    }
 
+    async getMensagem(token: string): Promise<any> {
+        try {
+            if (token) {
+                const decoded = jwt.verify(token, config.jwt.secret) as JwtPayload;
+                console.log(decoded)
+                return await this.userRep.getMensagem(decoded.email);
             }
             return false;
         } catch (err) {
